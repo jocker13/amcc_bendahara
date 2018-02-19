@@ -1,0 +1,17 @@
+tutorial GITHUP
+
+1. git status =====> melihat file apa aja yang sudah di edit
+2. Git add (NAMA FILE) ====> untuk git add hanya file(yang diedit) tertentu
+   Git add -A ====> untuk git add hanya file(yang diedit) semuanya
+
+3. git commt -m "NAMA KOMIT"
+
+4. Git pull origin master ====> mengunduh kalau ada update di master oleh user lain
+
+5. git push origin master ====> mengapload file yang telah di commit
+
+
+
+
+
+*master (nama branch)
