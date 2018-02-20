@@ -95,7 +95,7 @@ header("location: login");
 			<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 				<div class="profile-sidebar">
 					<div class="profile-userpic">
-						<img src="<?php echo base_url('assets/img/aa.png') ?>" class="img-responsive" alt="">
+						<img src="<?php echo base_url('assets/img/amcc1.png') ?>" class="img-responsive" alt="">
 					</div>
 					<div class="profile-usertitle">
 						<div class="profile-usertitle-name"><?php echo $nama;  ?></div>
@@ -108,27 +108,27 @@ header("location: login");
 				<ul class="nav menu">
 					
 					<?php if($level == 'admin'): ?>
-						<li><a href="<?php echo base_url('/user') ?>"><img src="<?php echo base_url('assets/img/user.png') ?>" >&nbsp; Pengguna</a></li>   
+						<li><a href="<?php echo base_url('/user') ?>"><img src="<?php echo base_url('assets/img/users.png') ?>" >&nbsp; Pengguna</a></li>   
 					<?php endif; ?>
 					<?php if($level == 'admin' || $level == 'users'): ?>
-						<li><a href="<?php echo base_url('/kegiatan') ?>"><img src="<?php echo base_url('assets/img/pencil.png') ?>">&nbsp; Kegiatan</a></li>
+						<li><a href="<?php echo base_url('/kegiatan') ?>"><img src="<?php echo base_url('assets/img/list.png') ?>">&nbsp; Kegiatan</a></li>
 					<?php endif; ?>
 					<?php if($level == 'admin' || $level == 'users'): ?>
-						<li><a href="<?php echo base_url('/estimasi') ?>"><img src="<?php echo base_url('assets/img/checklist.png') ?>">&nbsp; Estimasi</a></li>
+						<li><a href="<?php echo base_url('/estimasi') ?>"><img src="<?php echo base_url('assets/img/currency.png') ?>">&nbsp; Estimasi</a></li>
 					<?php endif; ?>
 
 					<?php if($level == 'admin' || $level == 'users'): ?>
-						<li><a href="<?php echo base_url('/realisasi') ?>"><img src="<?php echo base_url('assets/img/checklist.png') ?>">&nbsp; Realisasi</a></li>
+						<li><a href="<?php echo base_url('/realisasi') ?>"><img src="<?php echo base_url('assets/img/coins.png') ?>">&nbsp; Realisasi</a></li>
 					<?php endif; ?>
 					<?php if($level == 'admin'): ?>
-						<li><a href="<?php echo base_url('/transaksiumum') ?>"><img src="<?php echo base_url('assets/img/checklist.png') ?>">&nbsp; Transaksi Umum</a></li>
+						<li><a href="<?php echo base_url('/transaksiumum') ?>"><img src="<?php echo base_url('assets/img/money-bag.png') ?>">&nbsp; Transaksi Umum</a></li>
 					<?php endif; ?>
-					<?php if($level == 'admin'): ?>
+<!-- 					<?php if($level == 'admin'): ?>
 						<li><a href="<?php echo base_url('/detailtransaksi') ?>"><img src="<?php echo base_url('assets/img/checklist.png') ?>">&nbsp; Detail Transaksi</a></li>
-					<?php endif; ?>
+					<?php endif; ?> -->
 					<?php if($level == 'admin' || $level == 'users'): ?>
 						<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-							<em class="fa fa-navicon">&nbsp;</em> Lampiran Nota <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+						<img src="<?php echo base_url('assets/img/check.png') ?>"> Lampiran Nota <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 						</a>
 						<ul class="children collapse" id="sub-item-1">
 							<li><a class="" href="<?php echo base_url('/nota') ?>">
@@ -140,7 +140,7 @@ header("location: login");
 						</ul>
 					<?php endif; ?>
 					<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
-						<em class="fa fa-navicon">&nbsp;</em> Laporan<span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
+						<img src="<?php echo base_url('assets/img/invoice.png') ?>"> Laporan<span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
 					</a>
 					<ul class="children collapse" id="sub-item-2">
 						<li><a class="" href="<?php echo base_url('/laporan_estimasi') ?>">
@@ -154,18 +154,18 @@ header("location: login");
 								<span class="fa fa-arrow-right">&nbsp;</span> Transaksi Umum
 							</a></li>
 						<?php endif; ?>
-						<?php if($level == 'admin' || $level == 'ketua'): ?>
+<!-- 						<?php if($level == 'admin' || $level == 'ketua'): ?>
 							<li><a class="" href=" <?php echo base_url('/detailtransaksi') ?>">
 								<span class="fa fa-arrow-right">&nbsp;</span> Detail Transaksi
 							</a></li>
-						<?php endif; ?>
+						<?php endif; ?> -->
 						<?php if($level == 'admin' || $level == 'users'): ?>
 							<li><a class="" href=" <?php echo base_url('/notabaru') ?>">
 								<span class="fa fa-arrow-right">&nbsp;</span> Cetak Nota Baru
 							</a></li>
 						<?php endif; ?>
 					</ul>
-				<li><a href="javascript:if(confirm('Apakah anda ingin logout?')){document.location='<?php echo base_url();?>login/logout';}"><img src="<?php echo base_url('assets/img/cancel.png') ?>" >Logout</a></li>
+				<li><a href="javascript:if(confirm('Apakah anda ingin logout?')){document.location='<?php echo base_url();?>login/logout';}"><img src="<?php echo base_url('assets/img/close-circular-button-of-a-cross.png') ?>" > Logout</a></li>
 			</ul>
 		</div>
 
