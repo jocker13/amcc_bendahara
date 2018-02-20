@@ -12,7 +12,7 @@
         <form role="form"  action="<?php echo base_url(); ?>Kegiatan/simpan" method="POST">
 
           <div class="form-group">
-            <input type="hidden" name="op" id="op" value="" class="form-control">
+            <input type="hidden" name="op" id="op" value="tambah" class="form-control">
             <input type="hidden" name="id_kegiatan" id="id_kegiatan" value="" class="form-control">
             <label>TAHUN KEPENGURUSAN</label>
             <input type="text" name="tahun_kep" id="tahun_kep" value="" class="form-control" placeholder="2016/2017">

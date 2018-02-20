@@ -17,7 +17,7 @@ class Kegiatan extends CI_Controller {
 		$data = array(
 			"container" => "kegiatan"
 		);
-		$data['op']='tambah';
+		// $data['op']='tambah';
 		// $data['sql']=$this->kegiatan_model->getKegiatan($id_users,$jabatan)->result();
 		$this->load->view("template", $data);	
 	}
