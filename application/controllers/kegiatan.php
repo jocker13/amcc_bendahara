@@ -39,9 +39,19 @@ class Kegiatan extends CI_Controller {
 			// exit();
 			if ($op=="tambah") {
 				$this->kegiatan_model->save($data);
+				$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil disimpan</p>
+                </div>');  
 			}
 			else{
 				$this->kegiatan_model->ubah($id_kegiatan, $data);
+				$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil dirumbah</p>
+                </div>'); 
 			}
 			
 			redirect('kegiatan');
@@ -78,8 +88,11 @@ class Kegiatan extends CI_Controller {
 	}
 	public function ajax_delete($id)
 	{
+		
 		$this->kegiatan_model->delete_by_id($id);
+		 
 		echo json_encode(array("status" => TRUE));
+
 	}
 	public function ajax_edit($id)
 	{

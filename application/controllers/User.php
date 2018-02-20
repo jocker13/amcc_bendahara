@@ -14,8 +14,6 @@ class User extends CI_Controller {
 		$data = array(
 			"container" => "user"
 		);
-		$data['op']='tambah';
-		$data['sql']=$this->user_model->getUser()->result();
 		$this->load->view("template", $data);
 	}
 	public function simpan()
@@ -61,5 +59,46 @@ class User extends CI_Controller {
 		$data['op']='edit';
 		$data['sql']=$this->user_model->edit($id_users)->result();
 		$this->load->view("template", $data);
+	}
+	public function ajax_list()
+	{
+		$list = $this->user_model->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $user) {
+			$no++;
+			$row = array();
+			$row[] = $user->nim;
+			$row[] = $user->nama;
+			$row[] = $user->jabatan;
+			$row[] = $user->email;
+			$row[] = $user->notelp;
+			
+			//add html for action
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+		
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $this->user_model->count_all(),
+						"recordsFiltered" => $this->user_model->count_filtered(),
+						"data" => $data,
+				);
+		//output to json format
+		echo json_encode($output);
+	}
+	public function ajax_delete($id)
+	{
+		$this->user_model->delete_by_id($id);
+		echo json_encode(array("status" => TRUE));
+	}
+	public function ajax_edit($id)
+	{
+		$data=$this->user_model->get_by_id($id);
+		// $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
+		echo json_encode($data);
 	}
 }

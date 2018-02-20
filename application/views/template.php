@@ -189,6 +189,7 @@ header("location: login");
 
 var save_method; //for save method string
 var table;
+var pengguna;
 
 $(document).ready(function() {
 
@@ -206,7 +207,7 @@ $(document).ready(function() {
 });
 
 
-
+$('#notifications').slideDown('slow').delay(1000).slideUp('slow');
 $('#tambah').on('click', function() {
 	var data = $("#id_kegiatan").val();
 	console.log(data);
@@ -223,6 +224,27 @@ table = $('#kegiatan').DataTable({
 		        // Load data for the table's content from an Ajax source
 		        "ajax": {
 		        	"url": "<?php echo site_url('kegiatan/ajax_list')?>",
+		        	"type": "POST"
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+ pengguna = $('#table-pengguna').DataTable({ 
+
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], //Initial no order.
+
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('user/ajax_list')?>",
 		        	"type": "POST"
 		        },
 
@@ -290,6 +312,72 @@ function edit_kegiatan(id)
         	alert('Error get data from ajax');
         }
     });
+
+    
+   
+}
+// ajax untuk Pengguna
+function reload_table_user()
+{
+    pengguna.ajax.reload(null,false); //reload datatable ajax 
+}
+function delete_user(id)
+{
+	if(confirm('Are you sure delete this data?'))
+	{
+        // ajax delete data to database
+        $.ajax({
+        	url : "<?php echo site_url('user/ajax_delete')?>/"+id,
+        	type: "POST",
+        	dataType: "JSON",
+        	success: function(data)
+        	{
+                //if success reload ajax table
+                // $('#modal_form').modal('hide');
+                reload_table_user();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error deleting data');
+            }
+        });
+
+    }
+}
+function edit_user(id)
+{
+	save_method = 'update';
+    // $('#form')[0].reset(); // reset form on modals
+    // $('.form-group').removeClass('has-error'); // clear error class
+    // $('.help-block').empty(); // clear error string
+
+    //Ajax Load data from ajax
+    $.ajax({
+    	url : "<?php echo site_url('user/ajax_edit/')?>/"+id,
+    	type: "GET",
+    	dataType: "JSON",
+    	success: function(data)
+    	{
+    		console.log(data);
+
+    		$('#id_users').val(data.id_users);
+    		$('#nama').val(data.nama);
+    		$('#nim').val(data.nim);
+    		$('#email').val(data.email);
+    		$('#jabatan').val(data.jabatan);
+    		$('#notelp').val(data.notelp);
+    		$('#password').val(data.password);
+    		$('#op').val('edit');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+
+        	alert('Error get data from ajax');
+        }
+    });
+
+    // ajax untuk Pengguna
+   
 }
 </script>
 

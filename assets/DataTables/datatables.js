@@ -11428,7 +11428,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "Menampilkan _START_ dari _END_ ",
 	
 	
 			/**
@@ -11589,7 +11589,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "Menampilkan _MENU_ ",
 	
 	
 			/**

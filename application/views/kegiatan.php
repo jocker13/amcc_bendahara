@@ -1,3 +1,4 @@
+<div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="row">
   <div class="col-lg-12">
   </br>
