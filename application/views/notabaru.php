@@ -1,4 +1,4 @@
-<?php 
+<!-- <?php 
 $op;
 $id_notabaru = "";
 $no_nota ="";
@@ -25,11 +25,11 @@ if ($op=='edit')
   }
 }
 ?>
-
+ -->
 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header" align="center">NOTA BARU</h2>
+    <br>
   </div>
 </div><!--/.row-->
 <div class="row">
@@ -41,7 +41,7 @@ if ($op=='edit')
           <div class="col-md-6">
             <form role="form"  action="<?php echo base_url(); ?>notabaru/simpan" method="POST">
               <div class="form-group">
-                <input type="hidden" name="op" value="<?php echo $op ?>" class="form-control">
+              <input type="hidden" name="op" id="op" value="tambah" class="form-control">
                 <input type="hidden" name="id_notabaru" value="<?php echo $id_notabaru ?>" class="form-control">
                 <label>No.Nota</label>
                 <input type="text" name="no_nota" value="<?php echo $no_nota ?>" class="form-control" required>
@@ -80,7 +80,7 @@ if ($op=='edit')
               </div>
               <br>
               <div align="right" class="form-group">
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan</button>
               </div>
             </form>
           </div>
@@ -88,7 +88,39 @@ if ($op=='edit')
       </div> 
     </div><!--/.row-->
 
-    <div class="row">
+
+      <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">DAFTAR NOTA BARU</div>
+                <div class="panel-body">
+
+                  <table id="table-notabaru" class="table table-striped table-bordered" >
+                    <thead>
+                      <tr>
+                       <th style="background: dodgerblue; text-align: center">NO.NOTA</th>
+                       <th style="background: dodgerblue; text-align: center">TANGGAL</th>
+                       <th style="background: dodgerblue; text-align: center">DITERIMA DARI</th>
+                       <th style="background: dodgerblue; text-align: center">UANG SEBESAR</th>
+                       <th style="background: dodgerblue; text-align: center">TERBILANG</th>
+                       <th style="background: dodgerblue; text-align: center">PENERIMA</th>
+                       <th style="background: dodgerblue; text-align: center">No. Telp</th>
+                       <th style="background: dodgerblue; text-align: center">KETERANGAN</th>
+                       <th style="background: dodgerblue; text-align: center">AKSI</th>
+
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+   <!--  <div class="row">
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-heading">DAFTAR NOTA BARU</div>
@@ -98,15 +130,7 @@ if ($op=='edit')
                 <table class="table table-bordered table-striped">
                  <thead>
                   <tr style="background: dodgerblue; text-align: center; ">
-                   <th style="background: dodgerblue; text-align: center">NO.NOTA</th>
-                   <th style="background: dodgerblue; text-align: center">TANGGAL</th>
-                   <th style="background: dodgerblue; text-align: center">DITERIMA DARI</th>
-                   <th style="background: dodgerblue; text-align: center">UANG SEBESAR</th>
-                   <th style="background: dodgerblue; text-align: center">TERBILANG</th>
-                   <th style="background: dodgerblue; text-align: center">PENERIMA</th>
-                   <th style="background: dodgerblue; text-align: center">No. Telp</th>
-                   <th style="background: dodgerblue; text-align: center">KETERANGAN</th>
-                   <th style="background: dodgerblue; text-align: center">AKSI</th>
+                   
                  </tr>
                  
                </thead>  
@@ -138,4 +162,4 @@ if ($op=='edit')
                 ?>
               </table>
             </div>
-          </div>
+          </div> -->

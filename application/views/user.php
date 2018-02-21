@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h1 class="page-header"></h1>
+    <br>
   </div>
 </div><!--/.row-->
 
@@ -26,7 +26,7 @@
             <div class="form-group">
               <label>Jabatan</label>
               <select class="form-control" name="jabatan"  id="jabatan" >
-                <option value="">Pilih Jabatan</option>
+                <option value="">--Pilih Jabatan--</option>
                 <option value="admin">Admin</option>
                 <option value="ketua">Ketua</option>
                 <option value="users">Users</option>
@@ -47,7 +47,7 @@
               <input type="text" name="notelp"  id="notelp" class="form-control">
             </div>
             <div class="form-group" align="right">
-              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan </button>
             </div>
           </form>
         </div><!--End .article-->
@@ -58,12 +58,11 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="panel panel-default">
-        <div class="panel-heading">DAFTAR NOTA BARU</div>
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-12">
               <div class="panel panel-default">
-                <div class="panel-heading">Daftar Kegiatan</div>
+                <div class="panel-heading">DAFTAR PENGGUNA</div>
                 <div class="panel-body">
 
                   <table id="table-pengguna" class="table table-striped table-bordered" >

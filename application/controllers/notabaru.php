@@ -12,10 +12,8 @@ class NotaBaru extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-			"container" => "notabaru"
+			"container" => "NotaBaru"
 		);
-		$data['op']='tambah';
-		$data['sql']=$this->notabaru_model->getNotaBaru()->result();
 		$this->load->view("template", $data);
 	}
 	public function simpan()
@@ -60,10 +58,54 @@ class NotaBaru extends CI_Controller {
 	public function edit($id_notabaru)
 	{
 		$data = array(
-			"container" => "notabaru"
+			"container" => "NotaBaru"
 		);
 		$data['op']='edit';
 		$data['sql']=$this->notabaru_model->edit($id_notabaru)->result();
 		$this->load->view("template", $data);
+	}
+	public function ajax_list()
+	{
+		$list = $this->notabaru_model->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $notabaru) {
+			$no++;
+			$row = array();
+			$row[] = $notabaru->no_nota;
+			$row[] = $notabaru->tanggal;
+			$row[] = $notabaru->dari;
+			$row[] = $notabaru->uang;
+			$row[] = $notabaru->terbilang;
+			$row[] = $notabaru->penerima;
+			$row[] = $notabaru->no_telp;
+			$row[] = $notabaru->keterangan;
+			
+			//add html for action
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
+		
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $this->notabaru_model->count_all(),
+						"recordsFiltered" => $this->notabaru_model->count_filtered(),
+						"data" => $data,
+				);
+		//output to json format
+		echo json_encode($output);
+	}
+	public function ajax_delete($id)
+	{
+		$this->notabaru_model->delete_by_id($id);
+		echo json_encode(array("status" => TRUE));
+	}
+	public function ajax_edit($id)
+	{
+		$data=$this->notabaru_model->get_by_id($id);
+		// $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
+		echo json_encode($data);
 	}
 }

@@ -75,8 +75,8 @@ class User extends CI_Controller {
 			$row[] = $user->notelp;
 			
 			//add html for action
-			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_user('."'".$user->id_users."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
 		
 			$data[] = $row;
 		}

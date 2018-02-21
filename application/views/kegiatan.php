@@ -8,7 +8,7 @@
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">Input Data Kegiatan</div>
+      <div class="panel-heading">INPUT DATA KEGIATAN</div>
       <div class="panel-body">
         <form role="form"  action="<?php echo base_url(); ?>Kegiatan/simpan" method="POST">
 
@@ -27,7 +27,7 @@
             <input type="date" name="tanggal" id="tanggal" value="" class="form-control">
           </div>
           <div class="form-group" align="right">
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan</button>
           </div>
         </form> 
 
@@ -35,10 +35,9 @@
       </div><!--End .article-->
     </div>
   </div><!--End .articles-->
-  <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
       <div class="panel panel-default">
-        <div class="panel-heading">Daftar Kegiatan</div>
+        <div class="panel-heading">DAFTAR KEGIATAN</div>
         <div class="panel-body">
 
           <table id="kegiatan" class="table table-striped table-bordered" >

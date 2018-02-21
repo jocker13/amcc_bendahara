@@ -190,6 +190,7 @@ header("location: login");
 var save_method; //for save method string
 var table;
 var pengguna;
+var notabaru;
 
 $(document).ready(function() {
 
@@ -257,6 +258,29 @@ table = $('#kegiatan').DataTable({
 		        ],
 
 		    });
+  notabaru = $('#table-notabaru').DataTable({ 
+
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], //Initial no order.
+
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('notabaru/ajax_list')?>",
+		        	"type": "POST"
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+
+
 function reload_table()
 {
     table.ajax.reload(null,false); //reload datatable ajax 
@@ -312,9 +336,6 @@ function edit_kegiatan(id)
         	alert('Error get data from ajax');
         }
     });
-
-    
-   
 }
 // ajax untuk Pengguna
 function reload_table_user()
@@ -375,8 +396,74 @@ function edit_user(id)
         	alert('Error get data from ajax');
         }
     });
+    }
 
     // ajax untuk Pengguna
+
+
+// ajax untuk notabaru
+function reload_table_notabaru()
+{
+    notabaru.ajax.reload(null,false); //reload datatable ajax 
+}
+function delete_notabaru(id)
+{
+	if(confirm('Are you sure delete this data?'))
+	{
+        // ajax delete data to database
+        $.ajax({
+        	url : "<?php echo site_url('notabaru/ajax_delete')?>/"+id,
+        	type: "POST",
+        	dataType: "JSON",
+        	success: function(data)
+        	{
+                //if success reload ajax table
+                // $('#modal_form').modal('hide');
+                reload_table_notabaru();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error deleting data');
+            }
+        });
+
+    }
+}
+function edit_notabaru(id)
+{
+	save_method = 'update';
+    // $('#form')[0].reset(); // reset form on modals
+    // $('.form-group').removeClass('has-error'); // clear error class
+    // $('.help-block').empty(); // clear error string
+
+    //Ajax Load data from ajax
+    $.ajax({
+    	url : "<?php echo site_url('notabaru/ajax_edit/')?>/"+id,
+    	type: "GET",
+    	dataType: "JSON",
+    	success: function(data)
+    	{
+    		console.log(data);
+
+    		$('#id_notabaru').val(data.id_notabaru);
+    		$('#no_nota').val(data.no_nota);
+    		$('#tanggal').val(data.tanggal);
+    		$('#dari').val(data.dari);
+    		$('#uang').val(data.uang);
+    		$('#terbilang').val(data.terbilang);
+    		$('#penerima').val(data.penerima);
+    		$('#no_telp').val(data.no_telp);
+    		$('#keterangan').val(data.keterangan);
+    		$('#op').val('edit');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+
+        	alert('Error get data from ajax');
+        }
+    });
+
+    // ajax untuk notabaru
    
 }
 </script>
