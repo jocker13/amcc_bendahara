@@ -42,9 +42,19 @@ class NotaBaru extends CI_Controller {
 		// exit();
 		if ($op=="tambah") {
 			$this->notabaru_model->save($data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil disimpan</p>
+                </div>');
 		}
 		else{
 			$this->notabaru_model->ubah($id_notabaru, $data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil dirumbah</p>
+                </div>'); 
 		}
 		// $this->user_model->save($data);
 		redirect('notabaru');

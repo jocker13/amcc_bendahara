@@ -1,32 +1,4 @@
-<!-- <?php 
-$op;
-$id_notabaru = "";
-$no_nota ="";
-$tanggal = "";
-$dari = "";
-$uang = "";
-$terbilang = "";
-$penerima = "";
-$no_telp = "";
-$keterangan = "";
-if ($op=='edit')
-{
-  foreach ($sql as $val) {
-    $op = "edit";
-    $id_notabaru = $val->id_notabaru;
-    $no_nota = $val->no_nota;
-    $tanggal = $val->tanggal;
-    $dari = $val->dari;
-    $uang = $val->uang;
-    $terbilang = $val->terbilang;
-    $penerima = $val->penerima;
-    $no_telp = $val->no_telp;
-    $keterangan = $val->keterangan;
-  }
-}
-?>
- -->
-
+<div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="row">
   <div class="col-lg-12">
     <br>
@@ -42,21 +14,21 @@ if ($op=='edit')
             <form role="form"  action="<?php echo base_url(); ?>notabaru/simpan" method="POST">
               <div class="form-group">
               <input type="hidden" name="op" id="op" value="tambah" class="form-control">
-                <input type="hidden" name="id_notabaru" value="<?php echo $id_notabaru ?>" class="form-control">
+                <input type="hidden" name="id_notabaru" id="id_notabaru"  class="form-control">
                 <label>No.Nota</label>
-                <input type="text" name="no_nota" value="<?php echo $no_nota ?>" class="form-control" required>
+                <input type="text" name="no_nota" id="no_nota" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>TANGGAL</label>
-                <input type="date" name="tanggal" value="<?php echo $tanggal ?>" class="form-control" required>
+                <input type="date" name="tanggal" id="tanggal"  class="form-control" required>
               </div>
               <div class="form-group">
                 <label>DITERIMA DARI</label>
-                <input type="text" name="dari" value="<?php echo $dari ?>" class="form-control" required>
+                <input type="text" name="dari" id="dari" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>UANG SEBESAR</label>
-                <input type="text" name="uang" value="<?php echo $uang ?>" class="form-control" required> 
+                <input type="text" name="uang"  id="uang" class="form-control" required> 
               </div>
               
             </div>
@@ -64,19 +36,19 @@ if ($op=='edit')
              
               <div class="form-group">
                 <label>TERBILANG</label>
-                <input type="text" name="terbilang" value="<?php echo $terbilang ?>" class="form-control" required>
+                <input type="text" name="terbilang" id="terbilang" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>PENERIMA</label>
-                <input type="text" name="penerima" value="<?php echo $penerima ?>" class="form-control" required>
+                <input type="text" name="penerima"  id="penerima" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>No. Telp</label>
-                <input type="text" name="no_telp" value="<?php echo $no_telp ?>" class="form-control" required>
+                <input type="text" name="no_telp" id="no_telp" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>KETERANGAN</label>
-                <input type="text" name="keterangan" value="<?php echo $keterangan ?>" class="form-control" required>
+                <input type="text" name="keterangan"  id="keterangan" class="form-control" required>
               </div>
               <br>
               <div align="right" class="form-group">

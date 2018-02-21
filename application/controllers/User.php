@@ -38,9 +38,19 @@ class User extends CI_Controller {
 		// exit();
 		if ($op=="tambah") {
 			$this->user_model->save($data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil disimpan</p>
+                </div>');
 		}
 		else{
 			$this->user_model->ubah($id_users, $data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil dirumbah</p>
+                </div>'); 
 		}
 		// $this->user_model->save($data);
 		redirect('user');
