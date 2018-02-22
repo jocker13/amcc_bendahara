@@ -1,72 +1,66 @@
-
+<div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div> 
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header" align="center">TRANSAKSI UMUM</h2>
+    <br>
   </div>
 </div><!--/.row-->
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
-      <form class="navbar-form navbar-right" role="search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="nama transaksi" name="srch-term" id_tran="srch-term">
-          <div class="input-group-btn">
-            <button class="btn btn-warning type=" submit="" "=""><i class="glyphicon glyphicon-search "></i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <div class="panel-heading" align="right"><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah</a></div>
-
+      <div class="panel-heading" align="right"><a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="glyphicon glyphicon-plus"></i> Tambah</a></div>
       <div class="panel-body">
+       <table id="table-transaksiumum" class="table table-striped table-bordered" >
+        <thead>
+          <tr>
+           <th style="background: dodgerblue; text-align: center;">TANGGAL</th>
+           <th style="background: dodgerblue; text-align: center;">NAMA TRANSAKSI</th>
+           <th style="background: dodgerblue; text-align: center;">JENIS</th>
+           <th style="background: dodgerblue; text-align: center;">NAMA SIE</th>
+           <th style="background: dodgerblue; text-align: center;">BANYAK</th>
+           <th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+           <th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+           <th style="background: dodgerblue; text-align: center;">NO. NOTA</th>
+           <th style="background: dodgerblue; text-align: center;">SALDO</th>
 
-        <table class="table table-bordered table-striped">
-         <thead>
-           <tr>   
-             <th style="background: dodgerblue; text-align: center;">TANGGAL</th>
-             <th style="background: dodgerblue; text-align: center;">NAMA TRANSAKSI</th>
-             <th style="background: dodgerblue; text-align: center;">JENIS</th>
-             <th style="background: dodgerblue; text-align: center;">NAMA SIE</th>
-             <th style="background: dodgerblue; text-align: center;">BANYAK</th>
-             <th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
-             <th style="background: dodgerblue; text-align: center;">JUMLAH</th>
-             <th style="background: dodgerblue; text-align: center;">NO. NOTA</th>
-             <th style="background: dodgerblue; text-align: center;">SALDO</th>
-             <!-- <th style="background: dodgerblue; text-align: center;">AKSI</th> -->
-           </tr>
-         </thead>
-         <?php
-         $no=0;
-         $jml=0;
-        foreach ($sql as $tran) {
-        $jml=$tran->banyak*$tran->harga_satuan;
-          $no++;
-          ?>
-          <tbody>
-            <tr>
-              <?php 
-              $newDate = date("d-m-Y", strtotime($tran->tanggal))
-              ?>
-              <td><?php echo $newDate  ?></td>
-              <td><?php echo $tran->nama_transaksi  ?></td>
-              <td><?php echo $tran->jenis  ?></td>
-              <td><?php echo $tran->nama_sie  ?></td>
-              <td><?php echo $tran->banyak  ?></td>
-              <td><?php echo $tran->harga_satuan  ?></td>
-              <td>Rp <?php echo number_format($jml,2.,',',',')  ?></td>
-              <td> <?php echo $tran->no_nota  ?></td>
-              <td>Rp <?php echo number_format($tran->saldo,2,',',',')  ?></td>
-             </tr>
-           </tbody>
-           <?php
-
-         }
-         ?>
-       </table>
-     </div>
+         </tr>
+       </thead>
+     </table>
    </div>
  </div>
 </div>
+</div>
+
+<!-- 
+</thead>
+<?php
+$no=0;
+$jml=0;
+foreach ($sql as $tran) {
+  $jml=$tran->banyak*$tran->harga_satuan;
+  $no++;
+  ?>
+  <tbody>
+    <tr>
+      <?php 
+      $newDate = date("d-m-Y", strtotime($tran->tanggal))
+      ?>
+      <td><?php echo $newDate  ?></td>
+      <td><?php echo $tran->nama_transaksi  ?></td>
+      <td><?php echo $tran->jenis  ?></td>
+      <td><?php echo $tran->nama_sie  ?></td>
+      <td><?php echo $tran->banyak  ?></td>
+      <td><?php echo $tran->harga_satuan  ?></td>
+      <td>Rp <?php echo number_format($jml,2.,',',',')  ?></td>
+      <td> <?php echo $tran->no_nota  ?></td>
+      <td>Rp <?php echo number_format($tran->saldo,2,',',',')  ?></td>
+    </tr>
+  </tbody>
+  <?php
+
+}
+?>
+</table> -->
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

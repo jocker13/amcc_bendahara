@@ -14,8 +14,8 @@ class TransaksiUmum extends CI_Controller {
 		$data = array(
 			"container" => "transaksiumum"
 		);
-		$data['op']='tambah';
-		$data['sql']=$this->transaksiumum_model->getTransaksiUmum()->result();
+/*		$data['op']='tambah';
+		$data['sql']=$this->transaksiumum_model->getTransaksiUmum()->result();*/
 		$this->load->view("template", $data);
 	}
 	public function simpan()
@@ -32,10 +32,11 @@ class TransaksiUmum extends CI_Controller {
 		} 
 		// echo $saldo1;
 		// exit();
-		$nama_transaksi=$this->input->post("nama_transaksi");
+		$tanggal=$this->input->post("tanggal");
+		
 		$id_tran=$this->input->post("id_tran");
 		$op=$this->input->post("op");
-		$tanggal=$this->input->post("tanggal");
+		$nama_transaksi=$this->input->post("nama_transaksi");
 		$jenis=$this->input->post("jenis");
 		$nama_sie=$this->input->post("nama_sie");
 		
@@ -43,18 +44,34 @@ class TransaksiUmum extends CI_Controller {
 		$no_nota=$this->input->post("no_nota");
 		$saldo=$saldo1;
 		$data = array(
-			'nama_transaksi' => $nama_transaksi , 
 			'tanggal' => $tanggal,
+			'nama_transaksi' => $nama_transaksi , 
 			'jenis' => $jenis,  
 			'banyak' => $banyak, 
-			'nama_sie' => $banyak, 
+			'nama_sie' => $nama_sie, 
 			'harga_satuan' => $harga_satuan, 
 			/*'jumlah' => $jumlah, */
 			'no_nota' => $no_nota, 
 			'saldo' => $saldo 
 		);
+		if ($op=="tambah") {
+			$this->trandaksiumum_model->save($data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil disimpan</p>
+                </div>');
+		}
+		else{
+			$this->transaksiumum_model->ubah($id_tran, $data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil di ubah</p>
+                </div>'); 
+		}
 		
-			$this->transaksiumum_model->save($data);
+/*			$this->transaksiumum_model->save($data);*/
 
 		redirect('transaksiumum');
 	}
@@ -73,4 +90,49 @@ class TransaksiUmum extends CI_Controller {
 		$data['sql']=$this->transaksiumum_model->edit($id_tran)->result();
 		$this->load->view("template", $data);
 	}
+
+	public function ajax_list()
+	{
+		$list = $this->transaksiumum_model->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $tran) {
+			$no++;
+			$row = array();
+			$row[] = $tran->tanggal;
+			$row[] = $tran->nama_transaksi;
+			$row[] = $tran->jenis;	
+			$row[] = $tran->nama_sie;
+			$row[] = $tran->banyak;
+			$row[] = $tran->harga_satuan;
+			$row[] = $tran->no_nota;
+			$row[] = $tran->saldo;
+			
+			//add html for action
+/*			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_transaksiumum('."'".$tran->id_tran."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_transaksiumum('."'".$tran->id_tran."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';*/
+		
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $this->transaksiumum_model->count_all(),
+						"recordsFiltered" => $this->transaksiumum_model->count_filtered(),
+						"data" => $data,
+				);
+		//output to json format
+		echo json_encode($output);
+	}
+/*	public function ajax_delete($id)
+	{
+		$this->transaksiumum_model->delete_by_id($id);
+		echo json_encode(array("status" => TRUE));
+	}
+	public function ajax_edit($id)
+	{
+		$data=$this->transaksiumum_model->get_by_id($id);
+		// $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
+		echo json_encode($data);
+	}*/
 }

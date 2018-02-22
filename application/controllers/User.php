@@ -49,7 +49,7 @@ class User extends CI_Controller {
 			$this->session->set_flashdata('msg', 
                 '<div class="alert alert-success">
                     <h4>Berhasil </h4>
-                    <p>data berhasil dirumbah</p>
+                    <p>data berhasil diubah</p>
                 </div>'); 
 		}
 		// $this->user_model->save($data);

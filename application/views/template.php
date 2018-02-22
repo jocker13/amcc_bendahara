@@ -191,6 +191,7 @@ var save_method; //for save method string
 var table;
 var pengguna;
 var notabaru;
+var transaksiumum;
 
 $(document).ready(function() {
 
@@ -279,6 +280,27 @@ table = $('#kegiatan').DataTable({
 		        ],
 
 		    });
+    notabaru = $('#table-transaksiumum').DataTable({ 
+
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], //Initial no order.
+
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('transaksiumum/ajax_list')?>",
+		        	"type": "POST"
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
 
 
 function reload_table()
@@ -287,7 +309,7 @@ function reload_table()
 }
 function delete_kegiatan(id)
 {
-	if(confirm('Are you sure delete this data?'))
+	if(confirm('Anda yakin akan menghapus data?'))
 	{
         // ajax delete data to database
         $.ajax({
@@ -344,7 +366,7 @@ function reload_table_user()
 }
 function delete_user(id)
 {
-	if(confirm('Are you sure delete this data?'))
+	if(confirm('Anda yakin akan menghapus data?'))
 	{
         // ajax delete data to database
         $.ajax({
@@ -408,7 +430,7 @@ function reload_table_notabaru()
 }
 function delete_notabaru(id)
 {
-	if(confirm('Are you sure delete this data?'))
+	if(confirm('Anda yakin akan menghapus data?'))
 	{
         // ajax delete data to database
         $.ajax({
@@ -462,10 +484,77 @@ function edit_notabaru(id)
         	alert('Error get data from ajax');
         }
     });
+    }
 
     // ajax untuk notabaru
-   
+/*
+// ajax untuk transaksiumum
+function reload_table_transaksiumum()
+{
+    transaksiumum.ajax.reload(null,false); //reload datatable ajax 
 }
+function delete_transaksiumum(id)
+{
+	if(confirm('Anda yakin akan menghapus data?'))
+	{
+        // ajax delete data to database
+        $.ajax({
+        	url : "<?php echo site_url('transaksiumum/ajax_delete')?>/"+id,
+        	type: "POST",
+        	dataType: "JSON",
+        	success: function(data)
+        	{
+                //if success reload ajax table
+                // $('#modal_form').modal('hide');
+                reload_table_transaksiumum();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error deleting data');
+            }
+        });
+
+    }
+}
+function edit_transaksiumum(id)
+{
+	save_method = 'update';
+    // $('#form')[0].reset(); // reset form on modals
+    // $('.form-group').removeClass('has-error'); // clear error class
+    // $('.help-block').empty(); // clear error string
+
+    //Ajax Load data from ajax
+    $.ajax({
+    	url : "<?php echo site_url('transaksiumum/ajax_edit/')?>/"+id,
+    	type: "GET",
+    	dataType: "JSON",
+    	success: function(data)
+    	{
+    		console.log(data);
+
+    		$('#id_tran').val(data.id_tran);
+    		$('#tanggal').val(data.tanggal);
+			$('#nama_transaksi').val(data.nama_transaksi);
+    		$('#jenis').val(data.jenis);
+    		$('#nama_sie').val(data.nama_sie);
+    		$('#banyak').val(data.banyak);
+    		$('#harga_satuan').val(data.harga_satuan);
+    		$('#no_nota').val(data.no_nota);
+    		$('#saldo').val(data.saldo);
+    		$('#op').val('edit');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+
+        	alert('Error get data from ajax');
+        }
+    });
+    }
+
+    // ajax untuk transaksiumum*/
+
+   
+
 </script>
 
 
