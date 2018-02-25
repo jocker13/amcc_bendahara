@@ -25,6 +25,7 @@ class NotaBaru extends CI_Controller {
 		$dari=$this->input->post("dari");
 		$uang=$this->input->post("uang");
 		$terbilang=$this->input->post("terbilang");
+		$institusi=$this->input->post("institusi");
 		$penerima=$this->input->post("penerima");
 		$no_telp=$this->input->post("no_telp");
 		$keterangan=$this->input->post("keterangan");
@@ -34,6 +35,7 @@ class NotaBaru extends CI_Controller {
 			'dari' => $dari, 
 			'uang' => $uang, 
 			'terbilang' => $terbilang, 
+			'institusi' => $institusi, 
 			'penerima' => $penerima, 
 			'no_telp' => $no_telp,
 			'keterangan' => $keterangan
@@ -85,15 +87,17 @@ class NotaBaru extends CI_Controller {
 			$row[] = $notabaru->no_nota;
 			$row[] = $notabaru->tanggal;
 			$row[] = $notabaru->dari;
-			$row[] = $notabaru->uang;
+			$row[] = 'Rp '. number_format($notabaru->uang,2,',','.');
 			$row[] = $notabaru->terbilang;
+			$row[] = $notabaru->institusi;
 			$row[] = $notabaru->penerima;
 			$row[] = $notabaru->no_telp;
 			$row[] = $notabaru->keterangan;
 			
 			//add html for action
-			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
-				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
+			$row[] = '<a class="btn btn-xs btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
+				  <a class="btn btn-xs btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
+				  <a class="btn btn-xs btn-default" href="javascript:void(0)" title="cetak" onclick="cetak_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-print"></i> Cetak</a>';
 		
 			$data[] = $row;
 		}

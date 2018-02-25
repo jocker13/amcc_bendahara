@@ -23,23 +23,26 @@
                 <input type="date" name="tanggal" id="tanggal"  class="form-control" required>
               </div>
               <div class="form-group">
-                <label>DITERIMA DARI</label>
+                <label>NAMA PPENYERAH</label>
                 <input type="text" name="dari" id="dari" class="form-control" required>
               </div>
               <div class="form-group">
                 <label>UANG SEBESAR</label>
                 <input type="text" name="uang"  id="uang" class="form-control" required> 
               </div>
+              <div class="form-group">
+                <label>TERBILANG</label>
+                <input type="text" name="terbilang" id="terbilang" class="form-control" required>
+              </div>
               
             </div>
             <div class="col-md-6">
              
               <div class="form-group">
-                <label>TERBILANG</label>
-                <input type="text" name="terbilang" id="terbilang" class="form-control" required>
-              </div>
-              <div class="form-group">
-                <label>PENERIMA</label>
+                <label>INSTITUSI</label>
+                <input type="text" name="institusi"  id="institusi" class="form-control" required>
+              </div> <div class="form-group">
+                <label>NAMA PENERIMA</label>
                 <input type="text" name="penerima"  id="penerima" class="form-control" required>
               </div>
               <div class="form-group">
@@ -74,14 +77,15 @@
                   <table id="table-notabaru" class="table table-striped table-bordered" >
                     <thead>
                       <tr>
-                       <th style="background: dodgerblue; text-align: center">NO.NOTA</th>
+                       <th style="background: dodgerblue; text-align: center">NO</th>
                        <th style="background: dodgerblue; text-align: center">TANGGAL</th>
-                       <th style="background: dodgerblue; text-align: center">DITERIMA DARI</th>
+                       <th style="background: dodgerblue; text-align: center">PENYERAH</th>
                        <th style="background: dodgerblue; text-align: center">UANG SEBESAR</th>
                        <th style="background: dodgerblue; text-align: center">TERBILANG</th>
+                       <th style="background: dodgerblue; text-align: center">INSTITUSI</th>
                        <th style="background: dodgerblue; text-align: center">PENERIMA</th>
                        <th style="background: dodgerblue; text-align: center">No. Telp</th>
-                       <th style="background: dodgerblue; text-align: center">KETERANGAN</th>
+                       <th style="background: dodgerblue; text-align: center">KET</th>
                        <th style="background: dodgerblue; text-align: center">AKSI</th>
 
                       </tr>

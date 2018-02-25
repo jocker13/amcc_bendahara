@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class transaksiumum_model extends CI_Model {
+class laporan_transaksi_model extends CI_Model {
 	var $table = 'transaksiumum';
 	var $column_order = array('tanggal','nama_transaksi','jenis','nama_sie','banyak','harga_satuan','saldo',NULL); //set column field database for datatable orderable
 	var $column_search = array('tanggal','nama_transaksi','jenis','nama_sie','banyak','harga_satuan','saldo'); //set column field database for datatable searchable just firstname , lastname , address are searchable
-	var $order = array('id_tran' => 'desc');
+	var $order = array('id_tran' => 'asc');
 
 	public function save($data)
 	{
@@ -24,9 +24,12 @@ class transaksiumum_model extends CI_Model {
 	}
 
 
-private function _get_datatables_query()
+private function _get_datatables_query($bulan,$tahun)
 	{
 		$this->db->from($this->table);
+		$this->db->where('month(tanggal)',$bulan);
+		$this->db->where('year(tanggal)',$tahun);
+		// $this->db->query("select * from transaksiumum where month(tanggal)='$bulan' and year(tanggal)='$tahun' ");
 	
 		
 		$i = 0;
@@ -63,18 +66,18 @@ private function _get_datatables_query()
 		}
 	}
 
-	function get_datatables()
+	function get_datatables($bulan,$tahun)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($bulan,$tahun);
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function count_filtered()
+	function count_filtered($bulan,$tahun)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($bulan,$tahun);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -98,22 +101,4 @@ private function _get_datatables_query()
 
 		return $query->row();
 	}
-
-
-	public function getTransaksiUmum($bulan,$tahun)
-	{
-		$sql =$this->db->query("select * from transaksiumum where month(tanggal)='$bulan' and year(tanggal)='$tahun'");
-		return $sql;
-	}
-	public function getKetua()
-	{
-		$sql =$this->db->query("select * from users where jabatan='ketua'");
-		return $sql;
-	}
-	public function getBendahara()
-	{
-		$sql =$this->db->query("select * from users where jabatan ='admin'");
-		return $sql;
-	}
-	
 }

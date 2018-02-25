@@ -28,8 +28,8 @@ class Nota extends CI_Controller {
 	}
 	public function simpan()
 	{
-		echo "tested";
-		exit();
+/*		echo "tested";
+		exit();*/
 		$data = array();
     
     if($op='tambah'){ // Jika user menekan tombol Submit (Simpan) pada form

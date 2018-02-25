@@ -20,7 +20,7 @@
           </div>
           <div class="form-group">
             <label>NAMA KEGIATAN</label>
-            <input type="text" name="nama_kegiatan" id="nama_kegiatan" value="" class="form-control">
+            <input type="text" style="text-transform: capitalize;" name="nama_kegiatan" id="nama_kegiatan" value="" class="form-control">
           </div> 
           <div class="form-group">
             <label>TANGGAL</label>

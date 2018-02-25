@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Estimasi extends CI_Controller {
+class laporanestimasi extends CI_Controller {
 	public $kegiatan='';
 	public function __construct(){
 		parent::__construct();
@@ -15,7 +15,7 @@ class Estimasi extends CI_Controller {
 		$tahun  = $this->input->post('tahun');
 		$kegiatan  = $this->input->post('kegiatan');
 		$data = array(
-			"container" => "estimasi"
+			"container" => "laporanestimasi"
 		);
 		$data['op']='tambah';
 		// $data['kegiatan_id']=$kegiatan; 

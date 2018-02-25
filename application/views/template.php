@@ -143,25 +143,15 @@ header("location: login");
 						<img src="<?php echo base_url('assets/img/invoice.png') ?>"> Laporan<span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
 					</a>
 					<ul class="children collapse" id="sub-item-2">
-						<li><a class="" href="<?php echo base_url('/laporan_estimasi') ?>">
+						<li><a class="" href="<?php echo base_url('/laporanestimasi') ?>">
 							<span class="fa fa-arrow-right">&nbsp;</span> Estimasi
 						</a></li>
 						<li><a class="" href=" <?php echo base_url('/laporan_realisasi') ?>">
 							<span class="fa fa-arrow-right">&nbsp;</span> Realisasi
 						</a></li>
 						<?php if($level == 'admin' || $level == 'ketua'): ?>
-							<li><a class="" href="<?php echo base_url('/laporan_tranumum') ?>">
+							<li><a class="" href="<?php echo base_url('/laporantransaksi') ?>">
 								<span class="fa fa-arrow-right">&nbsp;</span> Transaksi Umum
-							</a></li>
-						<?php endif; ?>
-<!-- 						<?php if($level == 'admin' || $level == 'ketua'): ?>
-							<li><a class="" href=" <?php echo base_url('/detailtransaksi') ?>">
-								<span class="fa fa-arrow-right">&nbsp;</span> Detail Transaksi
-							</a></li>
-						<?php endif; ?> -->
-						<?php if($level == 'admin' || $level == 'users'): ?>
-							<li><a class="" href=" <?php echo base_url('/notabaru') ?>">
-								<span class="fa fa-arrow-right">&nbsp;</span> Cetak Nota Baru
 							</a></li>
 						<?php endif; ?>
 					</ul>
@@ -191,22 +181,9 @@ var save_method; //for save method string
 var table;
 var pengguna;
 var notabaru;
+var estimasi;
 var transaksiumum;
-
-$(document).ready(function() {
-
-	$('#exampleModal').on('show.bs.modal', function (event) {
-            var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-            var modal= $(this)
-            console.log(div.data('jenis'));
-            // Isi nilai pada field
-            modal.find('#id_estimasi').attr("value",div.data('id'));
-            modal.find('#nama_estimasi').attr("value",div.data('estimasi'));
-            modal.find('#banyak').attr("value",div.data('banyak'));
-            modal.find('#harga_satuan').attr("value",div.data('harga'));
-            modal.find('#op').attr("value",div.data('op'));
-        });
-});
+var tabel_laporan_tran;
 
 
 $('#notifications').slideDown('slow').delay(1000).slideUp('slow');
@@ -214,6 +191,82 @@ $('#tambah').on('click', function() {
 	var data = $("#id_kegiatan").val();
 	console.log(data);
 	$("#model-kegiatan").val(data);
+
+});
+$('#tampil').on('click',function(){ 
+	var id_kegiatan = $("#id_kegiatan").val();
+	var nama =$("#id_kegiatan option:selected").html();
+	// console.log(nama);
+	$('#id_kegiatan_modal').val(id_kegiatan);
+	$('#nama_kegiatan_modal').val(nama);
+	// console.log(id_kegiatan);
+
+	//estimasi
+	estimasi = $('#tabel-estimasi').DataTable({ 
+				destroy: true,
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], 
+		        // "id_kegiatan" :id_kegiatan,//Initial no order.
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('estimasi/ajax_list')?>",
+		        	"type": "POST",
+		        	"data":{
+		        		id_kegiatan:id_kegiatan
+		        	}
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+
+}); 
+//estimasi
+$('#tampiltran').on('click',function(){ 
+	var bulan = $("#bulan").val();
+	var tahun = $("#tahun").val();
+	// var nama =$("#id_kegiatan option:selected").html();
+	// // console.log(nama);
+	// $('#id_kegiatan_modal').val(id_kegiatan);
+	// $('#nama_kegiatan_modal').val(nama);
+	// // console.log(id_kegiatan);
+	console.log(bulan);
+	console.log(tahun);
+
+	//estimasi
+	tabel_laporan_tran = $('#table-laporan-transaksi').DataTable({ 
+				destroy: true,
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], 
+		        // "id_kegiatan" :id_kegiatan,//Initial no order.
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('laporantransaksi/ajax_list')?>",
+		        	"type": "POST",
+		        	"data":{
+		        		bulan:bulan,
+		        		tahun:tahun
+		        	}
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+
 });
 
 // javascript untuk kegiatan
@@ -280,7 +333,7 @@ table = $('#kegiatan').DataTable({
 		        ],
 
 		    });
-    notabaru = $('#table-transaksiumum').DataTable({ 
+    transaksiumum = $('#table-transaksiumum').DataTable({ 
 
 		        "processing": true, //Feature control the processing indicator.
 		        "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -301,6 +354,8 @@ table = $('#kegiatan').DataTable({
 		        ],
 
 		    });
+
+		
 
 
 function reload_table()
@@ -333,9 +388,6 @@ function delete_kegiatan(id)
 function edit_kegiatan(id)
 {
 	save_method = 'update';
-    // $('#form')[0].reset(); // reset form on modals
-    // $('.form-group').removeClass('has-error'); // clear error class
-    // $('.help-block').empty(); // clear error string
 
     //Ajax Load data from ajax
     $.ajax({
@@ -375,8 +427,7 @@ function delete_user(id)
         	dataType: "JSON",
         	success: function(data)
         	{
-                //if success reload ajax table
-                // $('#modal_form').modal('hide');
+
                 reload_table_user();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -390,10 +441,6 @@ function delete_user(id)
 function edit_user(id)
 {
 	save_method = 'update';
-    // $('#form')[0].reset(); // reset form on modals
-    // $('.form-group').removeClass('has-error'); // clear error class
-    // $('.help-block').empty(); // clear error string
-
     //Ajax Load data from ajax
     $.ajax({
     	url : "<?php echo site_url('user/ajax_edit/')?>/"+id,
@@ -439,8 +486,6 @@ function delete_notabaru(id)
         	dataType: "JSON",
         	success: function(data)
         	{
-                //if success reload ajax table
-                // $('#modal_form').modal('hide');
                 reload_table_notabaru();
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -451,12 +496,26 @@ function delete_notabaru(id)
 
     }
 }
+//cetak nota baru
+function cetak_notabaru(id)
+{
+		console.log(id);
+
+            	 window.open("<?php echo site_url('cetaknotabaru?id_notabaru=')?>"+id);
+}
+//cetak laporan transaksi
+function cetak_laporan_transaksi(id)
+{
+		var bulan = $("#bulan").val();
+	var tahun = $("#tahun").val();
+	console.log(tahun);
+
+            	  window.open("<?php echo site_url('cetaktransaksi?bulan=')?>"+bulan+"&tahun="+tahun);
+}
+
 function edit_notabaru(id)
 {
 	save_method = 'update';
-    // $('#form')[0].reset(); // reset form on modals
-    // $('.form-group').removeClass('has-error'); // clear error class
-    // $('.help-block').empty(); // clear error string
 
     //Ajax Load data from ajax
     $.ajax({
@@ -473,6 +532,7 @@ function edit_notabaru(id)
     		$('#dari').val(data.dari);
     		$('#uang').val(data.uang);
     		$('#terbilang').val(data.terbilang);
+    		$('#institusi').val(data.institusi);
     		$('#penerima').val(data.penerima);
     		$('#no_telp').val(data.no_telp);
     		$('#keterangan').val(data.keterangan);
@@ -487,26 +547,24 @@ function edit_notabaru(id)
     }
 
     // ajax untuk notabaru
-/*
-// ajax untuk transaksiumum
-function reload_table_transaksiumum()
+
+// ajax untuk estimasi
+function reload_table_estimasi()
 {
-    transaksiumum.ajax.reload(null,false); //reload datatable ajax 
+    estimasi.ajax.reload(null,false); //reload datatable ajax 
 }
-function delete_transaksiumum(id)
+function delete_estimasi(id)
 {
 	if(confirm('Anda yakin akan menghapus data?'))
 	{
         // ajax delete data to database
         $.ajax({
-        	url : "<?php echo site_url('transaksiumum/ajax_delete')?>/"+id,
+        	url : "<?php echo site_url('estimasi/ajax_delete')?>/"+id,
         	type: "POST",
         	dataType: "JSON",
         	success: function(data)
         	{
-                //if success reload ajax table
-                // $('#modal_form').modal('hide');
-                reload_table_transaksiumum();
+                reload_table_estimasi();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -516,42 +574,112 @@ function delete_transaksiumum(id)
 
     }
 }
-function edit_transaksiumum(id)
+function edit_estimasi(id)
 {
 	save_method = 'update';
-    // $('#form')[0].reset(); // reset form on modals
-    // $('.form-group').removeClass('has-error'); // clear error class
-    // $('.help-block').empty(); // clear error string
+    $('#form')[0].reset(); // reset form on modals
+    var id_kegiatan = $("#id_kegiatan").val();
+	var nama =$("#id_kegiatan option:selected").html();
+	// console.log(nama);
+	$('#id_kegiatan_modal').val(id_kegiatan);
+	$('#nama_kegiatan_modal').val(nama);
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
 
     //Ajax Load data from ajax
     $.ajax({
-    	url : "<?php echo site_url('transaksiumum/ajax_edit/')?>/"+id,
-    	type: "GET",
-    	dataType: "JSON",
-    	success: function(data)
-    	{
-    		console.log(data);
+        url : "<?php echo site_url('estimasi/ajax_edit/')?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
 
-    		$('#id_tran').val(data.id_tran);
-    		$('#tanggal').val(data.tanggal);
-			$('#nama_transaksi').val(data.nama_transaksi);
-    		$('#jenis').val(data.jenis);
-    		$('#nama_sie').val(data.nama_sie);
-    		$('#banyak').val(data.banyak);
-    		$('#harga_satuan').val(data.harga_satuan);
-    		$('#no_nota').val(data.no_nota);
-    		$('#saldo').val(data.saldo);
-    		$('#op').val('edit');
+            $('[name="id_estimasi"]').val(data.id_estimasi);
+            $('[name="nama_estimasi"]').val(data.nama_estimasi);
+            $('[name="banyak"]').val(data.banyak);
+            $('[name="jenis"]').val(data.jenis);
+            $('[name="nama_sie"]').val(data.nama_sie);
+            $('[name="harga_satuan"]').val(data.harga_satuan);
+            $('#exampleModal').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Estimasi'); // Set title to Bootstrap modal title
+
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
-
-        	alert('Error get data from ajax');
+            alert('Error get data from ajax');
         }
     });
     }
+    function add_estimasi()
+{
 
-    // ajax untuk transaksiumum*/
+    save_method = 'add';
+    $('#form')[0].reset(); // reset form on modals
+    var id_kegiatan = $("#id_kegiatan").val();
+	var nama =$("#id_kegiatan option:selected").html();
+	// console.log(nama);
+	$('#id_kegiatan_modal').val(id_kegiatan);
+	$('#nama_kegiatan_modal').val(nama);
+    $('.form-group').removeClass('has-error'); // clear error class
+    $('.help-block').empty(); // clear error string
+    $('#exampleModal').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Tambah Data Estimasi'); // Set Title to Bootstrap modal title
+}
+function save_estimasi()
+{
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled',true); //set button disable 
+    var url;
+
+    if(save_method == 'add') {
+        url = "<?php echo site_url('estimasi/ajax_add')?>";
+    } else {
+        url = "<?php echo site_url('estimasi/ajax_update')?>";
+    }
+
+    // ajax adding data to database
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form').serialize(),
+        dataType: "JSON",
+        success: function(data)
+        {
+
+            if(data.status) //if success close modal and reload ajax table
+            {
+              $("#notifications" ).show();
+              $("#notifications" ).append( "<div class='alert alert-success'><h4>Berhasil </h4><p>data berhasil disimpan</p></div>" );
+              
+              $('#exampleModal').modal('hide');
+                reload_table_estimasi();
+                setInterval (function(){
+                	 $("#notifications" ).hide();
+                	},500);
+            }
+            else
+            {
+                for (var i = 0; i < data.inputerror.length; i++) 
+                {
+                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                }
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
+
+        }
+    });
+}
+    // ajax untuk estimasi
 
    
 

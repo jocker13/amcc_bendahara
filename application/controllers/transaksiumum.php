@@ -14,8 +14,6 @@ class TransaksiUmum extends CI_Controller {
 		$data = array(
 			"container" => "transaksiumum"
 		);
-/*		$data['op']='tambah';
-		$data['sql']=$this->transaksiumum_model->getTransaksiUmum()->result();*/
 		$this->load->view("template", $data);
 	}
 	public function simpan()
@@ -30,8 +28,6 @@ class TransaksiUmum extends CI_Controller {
 		else{
 			$saldo1 =$da-$jumlah;
 		} 
-		// echo $saldo1;
-		// exit();
 		$tanggal=$this->input->post("tanggal");
 		
 		$id_tran=$this->input->post("id_tran");
@@ -39,9 +35,6 @@ class TransaksiUmum extends CI_Controller {
 		$nama_transaksi=$this->input->post("nama_transaksi");
 		$jenis=$this->input->post("jenis");
 		$nama_sie=$this->input->post("nama_sie");
-		
-		/*$jumlah=$this->input->post("jumlah");*/
-		$no_nota=$this->input->post("no_nota");
 		$saldo=$saldo1;
 		$data = array(
 			'tanggal' => $tanggal,
@@ -49,29 +42,16 @@ class TransaksiUmum extends CI_Controller {
 			'jenis' => $jenis,  
 			'banyak' => $banyak, 
 			'nama_sie' => $nama_sie, 
-			'harga_satuan' => $harga_satuan, 
-			/*'jumlah' => $jumlah, */
-			'no_nota' => $no_nota, 
+			'harga_satuan' => $harga_satuan, 			
 			'saldo' => $saldo 
 		);
-		if ($op=="tambah") {
-			$this->trandaksiumum_model->save($data);
+		
+			$this->transaksiumum_model->save($data);
 			$this->session->set_flashdata('msg', 
                 '<div class="alert alert-success">
                     <h4>Berhasil </h4>
                     <p>data berhasil disimpan</p>
                 </div>');
-		}
-		else{
-			$this->transaksiumum_model->ubah($id_tran, $data);
-			$this->session->set_flashdata('msg', 
-                '<div class="alert alert-success">
-                    <h4>Berhasil </h4>
-                    <p>data berhasil di ubah</p>
-                </div>'); 
-		}
-		
-/*			$this->transaksiumum_model->save($data);*/
 
 		redirect('transaksiumum');
 	}
@@ -97,6 +77,7 @@ class TransaksiUmum extends CI_Controller {
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $tran) {
+			$jumlah=$tran->banyak*$tran->harga_satuan;
 			$no++;
 			$row = array();
 			$row[] = $tran->tanggal;
@@ -104,9 +85,9 @@ class TransaksiUmum extends CI_Controller {
 			$row[] = $tran->jenis;	
 			$row[] = $tran->nama_sie;
 			$row[] = $tran->banyak;
-			$row[] = $tran->harga_satuan;
-			$row[] = $tran->no_nota;
-			$row[] = $tran->saldo;
+			$row[] = 'Rp '. number_format($tran->harga_satuan,2,',','.');
+			$row[] = 'Rp '. number_format($jumlah,2,',','.');
+			$row[] = 'Rp '. number_format($tran->saldo,2,',','.');
 			
 			//add html for action
 /*			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_transaksiumum('."'".$tran->id_tran."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>

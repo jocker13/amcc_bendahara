@@ -19,9 +19,7 @@
            <th style="background: dodgerblue; text-align: center;">BANYAK</th>
            <th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
            <th style="background: dodgerblue; text-align: center;">JUMLAH</th>
-           <th style="background: dodgerblue; text-align: center;">NO. NOTA</th>
            <th style="background: dodgerblue; text-align: center;">SALDO</th>
-
          </tr>
        </thead>
      </table>
@@ -29,40 +27,6 @@
  </div>
 </div>
 </div>
-
-<!-- 
-</thead>
-<?php
-$no=0;
-$jml=0;
-foreach ($sql as $tran) {
-  $jml=$tran->banyak*$tran->harga_satuan;
-  $no++;
-  ?>
-  <tbody>
-    <tr>
-      <?php 
-      $newDate = date("d-m-Y", strtotime($tran->tanggal))
-      ?>
-      <td><?php echo $newDate  ?></td>
-      <td><?php echo $tran->nama_transaksi  ?></td>
-      <td><?php echo $tran->jenis  ?></td>
-      <td><?php echo $tran->nama_sie  ?></td>
-      <td><?php echo $tran->banyak  ?></td>
-      <td><?php echo $tran->harga_satuan  ?></td>
-      <td>Rp <?php echo number_format($jml,2.,',',',')  ?></td>
-      <td> <?php echo $tran->no_nota  ?></td>
-      <td>Rp <?php echo number_format($tran->saldo,2,',',',')  ?></td>
-    </tr>
-  </tbody>
-  <?php
-
-}
-?>
-</table> -->
-
-
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -115,11 +79,6 @@ foreach ($sql as $tran) {
           <label for="r-name" class="form-control-label">Harga Satuan</label>
           <input type="text" name="harga_satuan"  class="form-control" id="recipient-name" required>
         </div>
-        <div class="form-group">
-          <label for="r-name" class="form-control-label">NO. NOTA</label>
-          <input type="text" name="no_nota"  class="form-control" id="recipient-name" required>
-        </div> 
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
         <button type="submit" class="btn btn-primary">Simpan</button>

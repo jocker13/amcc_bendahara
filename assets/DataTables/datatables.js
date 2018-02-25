@@ -11428,7 +11428,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Menampilkan _START_ dari _END_ ",
+			"sInfo": "Menampilkan _END_ dari _END_ ",
 	
 	
 			/**
