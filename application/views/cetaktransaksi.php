@@ -81,7 +81,7 @@ hr {
     margin-top: 1cm;
     margin-left:  0cm;
     margin-right:  0cm;
-    margin-bottom: 0cm;
+    margin-bottom: 4cm;
  }
 
 body{
@@ -115,7 +115,7 @@ body{
 	<br>
 	<h2 style="text-align: center;">TRANSAKSI UMUM</h2>
 	<br>
-	<div  style="padding-left: 40px;padding-right:  30px; padding-bottom: 100px">
+	<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
 
 		<table >
 			<thead style="background: dodgerblue; text-align: center; ">

@@ -21,7 +21,8 @@ if ($op=='edit')
       }
     }
  ?>
-
+<script type = 'text/javascript' src = "<?php echo base_url(); 
+   ?>js/sample.js"></script>
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header"></h1>

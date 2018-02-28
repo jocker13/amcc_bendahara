@@ -123,9 +123,6 @@ header("location: login");
 					<?php if($level == 'admin'): ?>
 						<li><a href="<?php echo base_url('/transaksiumum') ?>"><img src="<?php echo base_url('assets/img/money-bag.png') ?>">&nbsp; Transaksi Umum</a></li>
 					<?php endif; ?>
-<!-- 					<?php if($level == 'admin'): ?>
-						<li><a href="<?php echo base_url('/detailtransaksi') ?>"><img src="<?php echo base_url('assets/img/checklist.png') ?>">&nbsp; Detail Transaksi</a></li>
-					<?php endif; ?> -->
 					<?php if($level == 'admin' || $level == 'users'): ?>
 						<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
 						<img src="<?php echo base_url('assets/img/check.png') ?>"> Lampiran Nota <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
@@ -184,6 +181,8 @@ var notabaru;
 var estimasi;
 var transaksiumum;
 var tabel_laporan_tran;
+var notakegiatan;
+var dataestimasi;
 
 
 $('#notifications').slideDown('slow').delay(1000).slideUp('slow');
@@ -342,6 +341,28 @@ table = $('#kegiatan').DataTable({
 		        // Load data for the table's content from an Ajax source
 		        "ajax": {
 		        	"url": "<?php echo site_url('transaksiumum/ajax_list')?>",
+		        	"type": "POST"
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+
+		notakegiatan = $('#notakegiatan').DataTable({ 
+
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], //Initial no order.
+
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('nota/ajax_list')?>",
 		        	"type": "POST"
 		        },
 
@@ -679,10 +700,166 @@ function save_estimasi()
         }
     });
 }
+
     // ajax untuk estimasi
+   // ajax untuk notabaru
 
-   
+// ajax untuk notakegiatan
+function reload_table_nota()
+{
+    notakegiatan.ajax.reload(null,false); //reload datatable ajax 
+}
+function delete_nota(id)
+{
+	if(confirm('Anda yakin akan menghapus data?'))
+	{
+        // ajax delete data to database
+        $.ajax({
+        	url : "<?php echo site_url('nota/ajax_delete')?>/"+id,
+        	type: "POST",
+        	dataType: "JSON",
+        	success: function(data)
+        	{
+                reload_table_nota();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error deleting data');
+            }
+        });
 
+    }
+}
+function edit_nota(id)
+{
+	save_method = 'update';
+
+    //Ajax Load data from ajax
+    $.ajax({
+    	url : "<?php echo site_url('nota/ajax_edit/')?>/"+id,
+    	type: "GET",
+    	dataType: "JSON",
+    	success: function(data)
+    	{
+    		console.log(data);
+
+    		$('#id_kegiatan').val(data.id_kegiatan);
+    		$('#id_nota').val(data.id_nota);
+    		$('#no_nota').val(data.no_nota);	
+    		$('#img-upload').attr('src','<?php echo site_url('upload/')?>/'+data.gambar);
+    		$('#op').val('edit');
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+
+        	alert('Error get data from ajax');
+        }
+    });
+}
+
+
+//realisai
+
+function pilihestimasi(){
+	$('#estimasipilih').modal('show');
+	id_kegiatan=$('#id_kegiatan').val();
+	dataestimasi = $('#estimasidata').DataTable({ 
+				destroy: true,
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], 
+		        // "id_kegiatan" :id_kegiatan,//Initial no order.
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('dataestimasi/ajax_list')?>",
+		        	"type": "POST",
+		        	"data":{
+		        		id_kegiatan:id_kegiatan
+		        	}
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+}
+function pilih_estimasi_data(id){
+    $.ajax({
+        url : "<?php echo site_url('dataestimasi/ajax_pilih/')?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+        	var jumlah=data.banyak*data.harga_satuan;
+        	// console.log(data);
+        	console.log(jumlah);
+            $('[name="id_estimasi"]').val(data.id_estimasi);
+            $('[name="nama_estimasi"]').val(data.nama_estimasi);
+            $('[name="banyak"]').val(data.banyak);
+            $('[name="jenis"]').val(data.jenis);
+            $('[name="nama_sie"]').val(data.nama_sie);
+
+            $('[name="harga_satuan"]').val(data.harga_satuan);
+            $('[name="jumlah"]').val(jumlah);
+            $('#estimasipilih').modal('hide'); // show bootstrap modal when complete loaded
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
+function pilih_nota(){
+	$('#notapilih').modal('show');
+	id_kegiatan=$('#id_kegiatan').val();
+	datanota = $('#nota_data').DataTable({ 
+				destroy: true,
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], 
+		        // "id_kegiatan" :id_kegiatan,//Initial no order.
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('datanota/ajax_list')?>",
+		        	"type": "POST",
+		        	"data":{
+		        		id_kegiatan:id_kegiatan
+		        	}
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+}
+function edit_nota(id){
+	 $.ajax({
+        url : "<?php echo site_url('datanota/ajax_pilih/')?>" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="no_nota"]').val(data.no_nota);
+            $('#notapilih').modal('hide'); // show bootstrap modal when complete loaded
+            
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+}
 </script>
 
 

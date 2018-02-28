@@ -28,46 +28,24 @@ class Nota extends CI_Controller {
 	}
 	public function simpan()
 	{
-/*		echo "tested";
-		exit();*/
-		$data = array();
-    
-    if($op='tambah'){ // Jika user menekan tombol Submit (Simpan) pada form
-      // lakukan upload file dengan memanggil function upload yang ada di GambarModel.php
-    		
-      $upload = $this->nota_model->upload();
-      
-      if($upload['result'] == "success"){ // Jika proses upload sukses
-         // Panggil function save yang ada di GambarModel.php untuk menyimpan data ke database
-        $this->nota_model->save($upload);
-        
-        redirect('gambar'); // Redirect kembali ke halaman awal / halaman view data
-      }else{ // Jika proses upload gagal
-        $data['message'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan
-      }
-    }
-    
-    // $this->load->view('gambar/form', $data);
- 
-
-		// $no_nota=$this->input->post("no_nota");
-		// $id_nota=$this->input->post("id_nota");
-		// $op=$this->input->post("op");
-		// $id_kegiatan=$this->input->post("id_kegiatan");
-		// $gambar=$this->input->post("gambar");
-		// $data = array(
-		// 	'no_nota' => $no_nota , 
-		// 	'id_kegiatan' => $id_kegiatan, 
-		// 	'gambar' => $gambar
-		// );
-		// // echo $op;
-		// // exit();
-		// if ($op=="tambah") {
-		// 	$this->nota_model->save($data);
-		// }
-		// else{
-		// 	$this->nota_model->ubah($id_nota, $data);
-		// }
+		$no_nota=$this->input->post("no_nota");
+		$id_nota=$this->input->post("id_nota");
+		$op=$this->input->post("op");
+		$id_kegiatan=$this->input->post("id_kegiatan");
+		$gambar=$this->upload_image();
+		$data = array(
+			'no_nota' => $no_nota , 
+			'id_kegiatan' => $id_kegiatan, 
+			'gambar' => $gambar
+		);
+		// echo $op;
+		// exit();
+		if ($op=="tambah") {
+			$this->nota_model->save($data);
+		}
+		else{
+			$this->nota_model->ubah($id_nota, $data);
+		}
 
 		redirect('nota');
 	}
@@ -85,5 +63,65 @@ class Nota extends CI_Controller {
 		$data['op']='edit';
 		$data['sql']=$this->nota_model->edit($id_nota)->result();
 		$this->load->view("template", $data);
+	}
+	function upload_image()  
+	{  print_r($_POST);
+      	// exit();
+		if(!isset($_FILES['input_gambar']) || $_FILES['input_gambar']['error'] == UPLOAD_ERR_NO_FILE) {
+			echo "Error no file selected"; 
+		} else {
+			print_r($_FILES);
+		}
+		if(isset($_FILES["input_gambar"]))  
+		{  
+			$extension = explode('.', $_FILES['input_gambar']['name']);  
+			$new_name = rand() . '.' . $extension[1];  
+			$destination = './upload/' . $new_name;  
+			move_uploaded_file($_FILES['input_gambar']['tmp_name'], $destination);  
+			return $new_name;  
+		}  
+	}
+	public function ajax_list()
+	{
+
+		$list = $this->nota_model->get_datatables();
+		$data = array();
+		$no = $_POST['start'];
+		foreach ($list as $nota) {
+			$no++;
+			$row = array();
+			$row[] = $nota->no_nota;
+			$row[] = $nota->nama_kegiatan;
+			$row[] = '<img src="upload/'.$nota->gambar.'" style="hight:100px;width:100px" class="img-responsive">';
+			
+			//add html for action
+			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_nota('."'".$nota->id_nota."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
+				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_nota('."'".$nota->id_nota."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
+		
+			$data[] = $row;
+		}
+
+		$output = array(
+						"draw" => $_POST['draw'],
+						"recordsTotal" => $this->nota_model->count_all(),
+						"recordsFiltered" => $this->nota_model->count_filtered(),
+						"data" => $data,
+				);
+		//output to json format
+		echo json_encode($output);
+	}
+	public function ajax_delete($id)
+	{
+		
+		$this->nota_model->delete_by_id($id);
+		 
+		echo json_encode(array("status" => TRUE));
+
+	}
+	public function ajax_edit($id)
+	{
+		$data=$this->nota_model->get_by_id($id);
+		// $data->dob = ($data->dob == '0000-00-00') ? '' : $data->dob; // if 0000-00-00 set tu empty for datepicker compatibility
+		echo json_encode($data);
 	}
 }

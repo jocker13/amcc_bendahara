@@ -16,15 +16,15 @@
             <input type="hidden" name="op" id="op" value="tambah" class="form-control">
             <input type="hidden" name="id_kegiatan" id="id_kegiatan" value="" class="form-control">
             <label>TAHUN KEPENGURUSAN</label>
-            <input type="text" name="tahun_kep" id="tahun_kep" value="" class="form-control" placeholder="2016/2017">
+            <input type="text" name="tahun_kep" id="tahun_kep" value="" class="form-control" placeholder="2016/2017" required  oninvalid="this.setCustomValidity('Tahun Kepengurusan Harus Diisi')" oninput="setCustomValidity('')">
           </div>
           <div class="form-group">
             <label>NAMA KEGIATAN</label>
-            <input type="text" style="text-transform: capitalize;" name="nama_kegiatan" id="nama_kegiatan" value="" class="form-control">
+            <input type="text" style="text-transform: capitalize;" name="nama_kegiatan" id="nama_kegiatan" value="" class="form-control" required  oninvalid="this.setCustomValidity('Nama Kegiatan harus Diisi')" oninput="setCustomValidity('')">
           </div> 
           <div class="form-group">
             <label>TANGGAL</label>
-            <input type="date" name="tanggal" id="tanggal" value="" class="form-control">
+            <input type="date" name="tanggal" id="tanggal" value="" class="form-control" required  oninvalid="this.setCustomValidity('Tanggal Harus Diisi')" oninput="setCustomValidity('')">
           </div>
           <div class="form-group" align="right">
             <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan</button>

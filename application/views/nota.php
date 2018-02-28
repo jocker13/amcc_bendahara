@@ -1,22 +1,3 @@
-<?php 
-    $op;
-    $id_nota = "";
-    $no_nota ="";
-    $nama_kegiatan = "";
-    $gambar = "";
-if ($op=='edit')
- {
-    foreach ($sql as $val) {
-      $op = "edit";
-      $id = $val->id_nota;
-      $no_nota = $val->no_nota;
-      $nama_kegiatan = $val->nama_kegiatan;
-      $gambar = $val->gambar;
-      }
-    }
- ?>
-
-
 <div class="row">
       <div class="col-lg-12">
       </br>
@@ -28,17 +9,19 @@ if ($op=='edit')
     <div class="panel panel-default">
           <div class="panel-heading">INPUT DATA NOTA</div>
           <div class="panel-body">
-                <form role="form"  action="<?php echo base_url(); ?>nota/simpan" method="POST">
+                <form role="form"  enctype="multipart/form-data" action="<?php echo base_url(); ?>nota/simpan" method="POST">
                     <div class="form-group">
-                         <input type="hidden" name="op" value="<?php echo $op ?>" class="form-control">
-                          <input type="hidden" name="id_nota" value="<?php echo $id_nota ?>" class="form-control">
+                         <input type="hidden" name="op" id="op" value="tambah" class="form-control">
+                          <input type="hidden" name="id_nota" id="id_nota" value="" class="form-control">
                         <label>No. Nota</label>
-                        <input type="text" name="no_nota" value="<?php echo $no_nota ?>" class="form-control">
+                        <input type="text" name="no_nota" id="no_nota" value="" class="form-control" required  oninvalid="this.setCustomValidity('No Nota harus Diisi')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                           <label>NAMA KEGIATAN</label>
 
-                           <select class="form-control" name="id_kegiatan" >
+                           <select class="form-control" id="id_kegiatan" name="id_kegiatan" required  oninvalid="this.setCustomValidity('kegiatan harus dipilih')"
+                                     oninput="setCustomValidity('')"/>
+                              <option>Pilih Kegiatan...</option>
                             <?php 
                               foreach ($kegiatan as $nama) {
                                 
@@ -59,17 +42,18 @@ if ($op=='edit')
                               <div class="input-group">
                                   <span class="input-group-btn">
                                       <span class="btn btn-default btn-file">
-                                          Browse… <input type="file" name="input_gambar" id="imgInp" value="">
+                                          Browse… <input type="file" name="input_gambar" id="imgInp" value="" >
                                       </span>
                                   </span>
-                                  <input type="text" class="form-control" readonly >
+                                  <input type="text" id="text-gambar" class="form-control"  required  oninvalid="this.setCustomValidity('Gambar harus diisi')"
+                                     oninput="setCustomValidity('')"/>
                               </div>
                               <img id='img-upload'/>
                           </div>
                       
                     </br>
                    <div class="form-group" align="right">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button onclick="validasi()" type="submit" class="btn btn-primary">Simpan</button>
                    </div>
                 </form> 
 
@@ -84,17 +68,16 @@ if ($op=='edit')
     <div class="panel panel-default">
         <div class="panel-heading">Daftar Nota</div>
             <div class="panel-body">
-                  <table class="table table-bordered table-striped">
+                  <table id="notakegiatan" class="table table-bordered table-striped">
                     <thead>
                       <tr style="background: dodgerblue;">
                         <th style="text-align: center;">No. Nota</th>
                         <th style="text-align: center;">NAMA KEGIATAN</th>
-                        <th style="text-align: center;">TAHUN</th>
                         <th style="text-align: center;">FILE</th>
                         <th style="text-align: center;">AKSI</th>
                       </tr>
                     </thead>
-                    <?php
+                    <!-- <?php
                         $no=0;
                         foreach ($sql as $nota) {
                           $no++;
@@ -115,7 +98,12 @@ if ($op=='edit')
                       <?php
 
                         }
-                      ?>
+                      ?> -->
                   </table>
             </div>
       </div>
+  <script type="text/javascript">
+    if ($("#text-gambar").val()=null) {
+        alert('Gambar Harus Di isi');
+    }
+  </script>

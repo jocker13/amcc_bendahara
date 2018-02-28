@@ -1,57 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class nota_model extends CI_Model {
+class data_nota_model extends CI_Model {
 	var $table = 'nota';
 	var $column_order = array('no_nota','nama_kegiatan',NULL); //set column field database for datatable orderable
 	var $column_search = array('no_nota','nama_kegiatan'); //set column field database for datatable searchable just firstname , lastname , address are searchable
 	var $order = array('id_nota' => 'asc');
 
-	public function getnota()
-	{
-		$sql =$this->db->query("select n.*, k.nama_kegiatan as nama_kegiatan, k.tahun_kep as tahun from nota n join kegiatan k on n.id_kegiatan = k.id_kegiatan");
-		return $sql;
-	}
-	public function getNotaKegiatan($kegiatan="")
 	
-	{
 
-
-
-		$sql =$this->db->query("select n.*, k.nama_kegiatan from nota n join kegiatan k on n.id_kegiatan = k.id_kegiatan where  n.id_kegiatan = '$kegiatan'");
-
-		return $sql;
-	}
-	public function save($data)
-	{
-
-		$this->db->insert('nota',$data);
-	}
-	public function delete($id)
-	{
-		$this->db->where('id_nota',$id_nota);
-		$this->db->delete('nota');
-	}
-	public function edit($id_nota)
-	{
-		$this->db->where('id_nota',$id_nota);
-		return $this->db->get('nota');
-	}
-	public function ubah($id_nota,$data)
-	{
-		$this->db->where('id_nota',$id_nota);
-		$this->db->update('nota', $data);
-	}
-
-
-	private function _get_datatables_query()
+	private function _get_datatables_query($id_kegiatan)
 	{
 
 		// $this->db->from($this->table);
 		// $this->db->join('kegiatan','kegiatan.id=nota.id_kegiatan');
 		$this->db->select('*')
     		 ->from('nota')
-    		 ->join('kegiatan','kegiatan.id_kegiatan=nota.id_kegiatan');
+    		 ->join('kegiatan','kegiatan.id_kegiatan=nota.id_kegiatan')
+    		 ->where('nota.id_kegiatan',$id_kegiatan);
 		
 		$i = 0;
 
@@ -87,18 +53,18 @@ class nota_model extends CI_Model {
 		}
 	}
 
-	function get_datatables()
+	function get_datatables($id_kegiatan)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($id_kegiatan);
 		if($_POST['length'] != -1)
 			$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function count_filtered()
+	function count_filtered($id_kegiatan)
 	{
-		$this->_get_datatables_query();
+		$this->_get_datatables_query($id_kegiatan);
 		$query = $this->db->get();
 		return $query->num_rows();
 	}

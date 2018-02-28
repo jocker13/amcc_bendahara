@@ -18,11 +18,11 @@
               <input type="hidden" name="op" id="op" value="tambah" class="form-control">
               <input type="hidden" name="id_users" id="id_users"  class="form-control">
               <label>NIM</label>
-              <input type="text" name="nim" id="nim" ="nim" class="form-control" required>
+              <input type="text" name="nim" id="nim" ="nim" class="form-control" required  oninvalid="this.setCustomValidity('NIM Harus Diisi')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
               <label>NAMA</label>
-              <input type="text" name="nama"  id="nama" class="form-control" required>
+              <input type="text" name="nama"  id="nama" class="form-control" required  oninvalid="this.setCustomValidity('Nama Harus Diisi')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
               <label>Jabatan</label>
@@ -37,15 +37,15 @@
           <div class="col-md-6">     
             <div class="form-group">
               <label>Email</label>
-              <input type="email" name="email"  id="email" class="form-control" required>
+              <input type="email" name="email"  id="email" class="form-control" required  oninvalid="this.setCustomValidity('Email Harus Diisi')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" name="password" id="password"  class="form-control" required>
+              <input type="password" name="password" id="password"  class="form-control" required  oninvalid="this.setCustomValidity('Password Harus Diisi')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group">
               <label>Nomor Telp</label>
-              <input type="text" name="notelp"  id="notelp" class="form-control">
+              <input type="text" name="notelp"  id="notelp" class="form-control" required  oninvalid="this.setCustomValidity('Nomor Telp Harus Diisi')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group" align="right">
               <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan </button>
