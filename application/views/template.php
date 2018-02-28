@@ -860,6 +860,7 @@ function edit_nota(id){
         }
     });
 }
+
 </script>
 
 

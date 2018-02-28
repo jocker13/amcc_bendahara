@@ -67,17 +67,29 @@
 
 	<div class="row">
 		<div class="col-md-6">
-			<div class="panel panel-default">
+		<div class="panel panel-default">
 				<div class="panel-heading">Input Data Realisasi</div>
 				<div class="panel-body">
 					</<form role="form"  action="<?php echo base_url(); ?>realisasi/simpan" method="POST">
 						<div class="form-group">
 							<label>Jenis</label>
-							<input type="text" name="jenis_realisasi"  class="form-control" required>
+								<select class="form-control" name="jenis">
+									<option value="pemasukan">PEMASUKAN</option>
+									<option value="pengeluaran">PENGELUARAN</option>
+								</select>
 						</div>
 						<div class="form-group">
 							<label>Nama Sie</label>
-							<input type="text" name="nama_sie_realisasi"  class="form-control" required>
+								<select class="form-control" name="nama_sie">
+									<option value="sumber dana">SUMBER DANA</option>
+									<option value="konsumsi">KONSUMSI</option>
+									<option value="pdd">PDD</option>
+									<option value="perlengkapan">PERLENGKAPAN</option>
+									<option value="acara">ACARA</option>
+									<option value="humas">HUMAS</option>
+									<option value="kesekretariatan">KESEKRETARIATAN</option>
+									<option value="p3k">P3K</option>
+								</select>
 						</div>
 						<div class="form-group">
 							<label>Nama Transaksi</label>
@@ -85,15 +97,15 @@
 						</div>
 						<div class="form-group">
 							<label>Banyak</label>
-							<input type="text" name="banyak_realisasi" class="form-control" required> 
+							<input type="text" name="banyak_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
 						</div>
 						<div class="form-group">
 							<label>Harga Satuan</label>
-							<input type="text" name="harga_satuan_realisasi" class="form-control" required> 
+							<input type="text" name="harga_satuan_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
 						</div>
 						<div class="form-group">
 							<label>Jumlah</label>
-							<input type="text" name="jumah_realisasi" class="form-control" required> 
+							<input type="text" name="jumah_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
 						</div>
 						<div class="form-group">
 							<label>No Nota</label><br>
