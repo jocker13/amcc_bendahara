@@ -73,11 +73,11 @@
         </div>
         <div class="form-group">
           <label for="banyak-name" class="form-control-label">Banyak</label>
-          <input type="text" name="banyak"  class="form-control" id="recipient-name" required>
+          <input type="text" name="banyak"  class="form-control" id="recipient-name" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required>
         </div>
         <div class="form-group">
           <label for="r-name" class="form-control-label">Harga Satuan</label>
-          <input type="text" name="harga_satuan"  class="form-control" id="recipient-name" required>
+          <input type="text" name="harga_satuan"  class="form-control" id="recipient-name" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>

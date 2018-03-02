@@ -95,9 +95,9 @@ class NotaBaru extends CI_Controller {
 			$row[] = $notabaru->keterangan;
 			
 			//add html for action
-			$row[] = '<a class="btn btn-xs btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
-				  <a class="btn btn-xs btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>
-				  <a class="btn btn-xs btn-default" href="javascript:void(0)" title="cetak" onclick="cetak_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-print"></i> Cetak</a>';
+			$row[] = '<a class="btn btn-xs btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-pencil"></i>   Ubah   </a><br>
+				  <a class="btn btn-xs btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-trash"></i>  Hapus  </a><br>
+				  <a class="btn btn-xs btn-default" href="javascript:void(0)" title="cetak" onclick="cetak_notabaru('."'".$notabaru->id_notabaru."'".')"><i class="glyphicon glyphicon-print"></i>   Cetak  </a>';
 		
 			$data[] = $row;
 		}

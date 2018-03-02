@@ -16,7 +16,7 @@
               <input type="hidden" name="op" id="op" value="tambah" class="form-control">
                 <input type="hidden" name="id_notabaru" id="id_notabaru"  class="form-control">
                 <label>No.Nota</label>
-                <input type="text" name="no_nota" id="no_nota" class="form-control" required>
+                <input type="text" name="no_nota" id="no_nota" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required>
               </div>
               <div class="form-group">
                 <label>TANGGAL</label>
@@ -28,7 +28,7 @@
               </div>
               <div class="form-group">
                 <label>UANG SEBESAR</label>
-                <input type="text" name="uang"  id="uang" class="form-control" required> 
+                <input type="text" name="uang"  id="uang" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
               </div>
               <div class="form-group">
                 <label>TERBILANG</label>
@@ -47,7 +47,7 @@
               </div>
               <div class="form-group">
                 <label>No. Telp</label>
-                <input type="text" name="no_telp" id="no_telp" class="form-control" required>
+                <input type="text" name="no_telp" id="no_telp" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required>
               </div>
               <div class="form-group">
                 <label>KETERANGAN</label>

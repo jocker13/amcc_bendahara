@@ -108,14 +108,14 @@
 							
 							<div class="form-group">
 								<label>Jenis</label>
-								<select class="form-control" name="jenis">
+								<select class="form-control" name="jenis" required oninvalid="this.setCustomValidity('Jenis harus Diisi')">
 									<option value="pemasukan">PEMASUKAN</option>
 									<option value="pengeluaran">PENGELUARAN</option>
 								</select>
 							</div>
 							<div class="form-group">
 								<label>Nama Sie</label>
-								<select class="form-control" name="nama_sie">
+								<select class="form-control" name="nama_sie" required oninvalid="this.setCustomValidity('Nama sie harus Diisi')">
 									<option value="sumber dana">SUMBER DANA</option>
 									<option value="konsumsi">KONSUMSI</option>
 									<option value="pdd">PDD</option>
@@ -128,16 +128,16 @@
 							</div>					
 							<div class="form-group">
 								<label for="nama_estimasi-name" class="form-control-label">Nama Transaksi</label>
-								<input type="text" name="nama_estimasi" value="" class="form-control" id="nama_estimasi" required>
+								<input type="text" name="nama_estimasi" value="" class="form-control" id="nama_estimasi" required oninvalid="this.setCustomValidity('Nama Transaksi harus Diisi')">
 							</div>
 
 							<div class="form-group">
 								<label for="banyak-name" class="form-control-label">Banyak</label>
-								<input type="text" name="banyak" value="" class="form-control" id="banyak" required>
+								<input type="text" name="banyak" value="" class="form-control" id="banyak" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required oninvalid="this.setCustomValidity('Banyak harus Diisi')">
 							</div>
 							<div class="form-group">
 								<label for="r-name" class="form-control-label">Harga Satuan</label>
-								<input type="text" name="harga_satuan" value=""  class="form-control" id="harga_satuan" required>
+								<input type="text" name="harga_satuan" value=""  class="form-control" id="harga_satuan" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required oninvalid="this.setCustomValidity('Harga satuan harus Diisi')">
 							</div>
 
 						</div>

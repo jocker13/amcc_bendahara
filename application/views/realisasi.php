@@ -9,7 +9,7 @@
 
 
 <div class="row">
-	<div class="col-md-5">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">Estimasi</div>
 			<div class="panel-body">
@@ -31,7 +31,7 @@
 
 						</select>
 					</div>
-					<div class="panel-heading" align="right"><a href="#" class="btn btn-primary" onclick="pilihestimasi()">Pilih Data Estimasi</a>
+					<div class="panel-heading" align="right"><a href="#" class="btn btn-default" onclick="pilihestimasi()">Pilih Data Estimasi</a>
 					</div>
 					<input type="hidden" name="id_estimasi" id="id_estimasi"  class="form-control">
 					<div class="form-group">
@@ -65,12 +65,12 @@
 		</div>
 	</div>
 
-	<div class="row">
+<!-- 	<div class="row"> -->
 		<div class="col-md-6">
 		<div class="panel panel-default">
 				<div class="panel-heading">Input Data Realisasi</div>
 				<div class="panel-body">
-					</<form role="form"  action="<?php echo base_url(); ?>realisasi/simpan" method="POST">
+					<form role="form"  action="<?php echo base_url(); ?>realisasi/simpan" method="POST">
 						<div class="form-group">
 							<label>Jenis</label>
 								<select class="form-control" name="jenis">
@@ -103,26 +103,32 @@
 							<label>Harga Satuan</label>
 							<input type="text" name="harga_satuan_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label>Jumlah</label>
 							<input type="text" name="jumah_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label>No Nota</label><br>
 							<div class="form-group" align="left">
-								<button   type="submit" class="btn btn-primary" onclick="pilih_nota()"><i class="glyphicon glyphicon-plus"></i> Pilih Nota</button><br>
+								<button   type="submit" class="btn btn-default" onclick="pilih_nota()"><i class="glyphicon glyphicon-plus"></i> Pilih Nota</button><br>
 							</div>
 							<input type="text" name="no_nota" class="form-control" disabled="" required > 
 						</div>
 						<div class="form-group" align="right">
-							<button type="submit" class="btn btn-primary">Simpan</button>
+							<button type="submit" class="btn btn-primary" >Simpan</button>
+						</div>
+						<div class="form-group">
+							<label></label><br>
+							<label></label><br>
+							<div class="form-group" align="left">
+							
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 
 
@@ -130,8 +136,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-body">
-
-				<table id="table_id" class="table table-striped table-bordered" >
+				<table id="tabel-realisasi" class="table table-striped table-bordered" >
 					<thead>
 						<tr style="background: dodgerblue; text-align: center;">
 							<th style="text-align: center;">No</th>
@@ -145,19 +150,6 @@
 							<th style="text-align: center;">Aksi</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Row 1 Data 1</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-							<td>Row 1 Data 2</td>
-						</tr>
-					</tbody>
 				</table>
 			</div>
 		</div>

@@ -183,6 +183,7 @@ var transaksiumum;
 var tabel_laporan_tran;
 var notakegiatan;
 var dataestimasi;
+var realisasi;
 
 
 $('#notifications').slideDown('slow').delay(1000).slideUp('slow');
@@ -363,6 +364,27 @@ table = $('#kegiatan').DataTable({
 		        // Load data for the table's content from an Ajax source
 		        "ajax": {
 		        	"url": "<?php echo site_url('nota/ajax_list')?>",
+		        	"type": "POST"
+		        },
+
+		        //Set column definition initialisation properties.
+		        "columnDefs": [
+		        { 
+		            "targets": [ -1 ], //last column
+		            "orderable": false, //set not orderable
+		        },
+		        ],
+
+		    });
+		realisasi = $('#tabel-realisasi').DataTable({ 
+
+		        "processing": true, //Feature control the processing indicator.
+		        "serverSide": true, //Feature control DataTables' server-side processing mode.
+		        "order": [], //Initial no order.
+
+		        // Load data for the table's content from an Ajax source
+		        "ajax": {
+		        	"url": "<?php echo site_url('realisasi/ajax_list')?>",
 		        	"type": "POST"
 		        },
 
@@ -860,6 +882,68 @@ function edit_nota(id){
         }
     });
 }
+
+
+//realisasi
+
+function reload_table_realisasi()
+{
+    realisasi.ajax.reload(null,false); //reload datatable ajax 
+}
+function delete_realisasi(id)
+{
+	if(confirm('Anda yakin akan menghapus data?'))
+	{
+        // ajax delete data to database
+        $.ajax({
+        	url : "<?php echo site_url('realisasi/ajax_delete')?>/"+id,
+        	type: "POST",
+        	dataType: "JSON",
+        	success: function(data)
+        	{
+                reload_table_nota();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            	alert('Error deleting data');
+            }
+        });
+
+    }
+}
+function edit_realisasi(id)
+{
+	save_method = 'update';
+
+    //Ajax Load data from ajax
+    $.ajax({
+    	url : "<?php echo site_url('realisasi/ajax_edit/')?>/"+id,
+    	type: "GET",
+    	dataType: "JSON",
+    	success: function(data)
+    	{
+
+    		var jumlah=data.banyak*data.harga_satuan;
+        	// console.log(data);
+        	console.log(jumlah);
+            $('[name="id_realisasi"]').val(data.id_realisasi);
+            $('[name="nama_realisasi"]').val(data.nama_realisasi);
+            $('[name="banyak_realisasi"]').val(data.banyak_realisasi);
+            $('[name="jenis"]').val(data.jenis);
+            $('[name="nama_sie"]').val(data.nama_sie);
+            $('[name="harga_satuan_realisasi"]').val(data.harga_satuan_realisasi);
+            $('[name="jumlah"]').val(jumlah);
+            $('[name="no_nota"]').val(no_nota);
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+
+        	alert('Error get data from ajax');
+        }
+    });
+}
+
+
 
 </script>
 

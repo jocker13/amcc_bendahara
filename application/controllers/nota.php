@@ -42,9 +42,19 @@ class Nota extends CI_Controller {
 		// exit();
 		if ($op=="tambah") {
 			$this->nota_model->save($data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil disimpan</p>
+                </div>');
 		}
 		else{
 			$this->nota_model->ubah($id_nota, $data);
+			$this->session->set_flashdata('msg', 
+                '<div class="alert alert-success">
+                    <h4>Berhasil </h4>
+                    <p>data berhasil di ubah</p>
+                </div>'); 
 		}
 
 		redirect('nota');

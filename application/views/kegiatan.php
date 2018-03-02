@@ -16,7 +16,7 @@
             <input type="hidden" name="op" id="op" value="tambah" class="form-control">
             <input type="hidden" name="id_kegiatan" id="id_kegiatan" value="" class="form-control">
             <label>TAHUN KEPENGURUSAN</label>
-            <input type="text" name="tahun_kep" id="tahun_kep" value="" class="form-control" placeholder="2016/2017" required  oninvalid="this.setCustomValidity('Tahun Kepengurusan Harus Diisi')" oninput="setCustomValidity('')">
+            <input type="text" name="tahun_kep" id="tahun_kep" value="" class="form-control" placeholder="2016/2017" required  oninvalid="this.setCustomValidity('Tahun Kepengurusan Harus Diisi')"  oninput="setCustomValidity('')">
           </div>
           <div class="form-group">
             <label>NAMA KEGIATAN</label>

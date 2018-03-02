@@ -1,3 +1,4 @@
+<div id="notifications"><?php echo $this->session->flashdata('msg'); ?></div>
 <div class="row">
       <div class="col-lg-12">
       </br>
@@ -14,14 +15,14 @@
                          <input type="hidden" name="op" id="op" value="tambah" class="form-control">
                           <input type="hidden" name="id_nota" id="id_nota" value="" class="form-control">
                         <label>No. Nota</label>
-                        <input type="text" name="no_nota" id="no_nota" value="" class="form-control" required  oninvalid="this.setCustomValidity('No Nota harus Diisi')" oninput="setCustomValidity('')">
+                        <input type="text" name="no_nota" id="no_nota" value="" class="form-control" required  oninvalid="this.setCustomValidity('No Nota harus Diisi')" onkeyup="this.value=this.value.replace(/[^\d]/,'')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                           <label>NAMA KEGIATAN</label>
 
                            <select class="form-control" id="id_kegiatan" name="id_kegiatan" required  oninvalid="this.setCustomValidity('kegiatan harus dipilih')"
                                      oninput="setCustomValidity('')"/>
-                              <option>Pilih Kegiatan...</option>
+                              <option>--Pilih Kegiatan--</option>
                             <?php 
                               foreach ($kegiatan as $nama) {
                                 
