@@ -81,7 +81,7 @@ hr {
     margin-top: 1cm;
     margin-left:  0cm;
     margin-right:  0cm;
-    margin-bottom: 4cm;
+    margin-bottom: 0cm;
  }
 
 body{

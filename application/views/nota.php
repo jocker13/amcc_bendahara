@@ -15,7 +15,7 @@
                          <input type="hidden" name="op" id="op" value="tambah" class="form-control">
                           <input type="hidden" name="id_nota" id="id_nota" value="" class="form-control">
                         <label>No. Nota</label>
-                        <input type="text" name="no_nota" id="no_nota" value="" class="form-control" required  oninvalid="this.setCustomValidity('No Nota harus Diisi')" onkeyup="this.value=this.value.replace(/[^\d]/,'')" oninput="setCustomValidity('')">
+                        <input type="text" name="no_nota" id="no_nota" value="" class="form-control" required  oninvalid="this.setCustomValidity('No Nota harus Diisi')" onkeyup="this.value=this.value.replace(/[^\d]/,'')">
                     </div>
                     <div class="form-group">
                           <label>NAMA KEGIATAN</label>
@@ -103,8 +103,4 @@
                   </table>
             </div>
       </div>
-  <script type="text/javascript">
-    if ($("#text-gambar").val()=null) {
-        alert('Gambar Harus Di isi');
-    }
-  </script>
+  

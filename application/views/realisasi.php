@@ -1,4 +1,4 @@
-
+<div id="notifications"></div> 
 
 <div class="row">
 	<div class="col-lg-12">
@@ -33,7 +33,7 @@
 					</div>
 					<div class="panel-heading" align="right"><a href="#" class="btn btn-default" onclick="pilihestimasi()">Pilih Data Estimasi</a>
 					</div>
-					<input type="hidden" name="id_estimasi" id="id_estimasi"  class="form-control">
+					
 					<div class="form-group">
 						<label>Jenis</label>
 						<input type="text" name="jenis"  id="jenis" class="form-control" disabled="">
@@ -70,7 +70,7 @@
 		<div class="panel panel-default">
 				<div class="panel-heading">Input Data Realisasi</div>
 				<div class="panel-body">
-					<form role="form"  action="<?php echo base_url(); ?>realisasi/simpan" method="POST">
+					<form action="#" id="form" >
 						<div class="form-group">
 							<label>Jenis</label>
 								<select class="form-control" name="jenis">
@@ -94,6 +94,10 @@
 						<div class="form-group">
 							<label>Nama Transaksi</label>
 							<input type="text" name="nama_realisasi" class="form-control" required>
+							<input type="hidden" name="op" class="form-control" value="tambah" required>
+							<input type="hidden" name="id_realisasi" class="form-control" required>
+							<input type="hidden" name="id_estimasi" id="id_estimasi"  class="form-control">
+
 						</div>
 						<div class="form-group">
 							<label>Banyak</label>
@@ -102,6 +106,7 @@
 						<div class="form-group">
 							<label>Harga Satuan</label>
 							<input type="text" name="harga_satuan_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
+							
 						</div>
 						<!-- <div class="form-group">
 							<label>Jumlah</label>
@@ -110,12 +115,13 @@
 						<div class="form-group">
 							<label>No Nota</label><br>
 							<div class="form-group" align="left">
-								<button   type="submit" class="btn btn-default" onclick="pilih_nota()"><i class="glyphicon glyphicon-plus"></i> Pilih Nota</button><br>
+								<a class="btn btn-default" onclick="pilih_nota()"><i class="glyphicon glyphicon-plus"></i> Pilih Nota</a><br>
 							</div>
-							<input type="text" name="no_nota" class="form-control" disabled="" required > 
+							<input type="text" name="no_nota" class="form-control" readonly="" required > 
+							<input type="hidden" name="id_nota" class="form-control"  required > 
 						</div>
 						<div class="form-group" align="right">
-							<button type="submit" class="btn btn-primary" >Simpan</button>
+							<a  onclick="save_realisasi()" class="btn btn-primary" >Simpan</a>
 						</div>
 						<div class="form-group">
 							<label></label><br>

@@ -7,16 +7,16 @@ class realisasi_model extends CI_Model {
 	var $column_search = array('jenis','nama_sie','nama_realisasi','banyak','harga_satuan','id_nota'); //set column field database for datatable searchable just firstname , lastname , address are searchable
 	var $order = array('id_realisasi' => 'desc');
 
-	public function getRealisasi()
-	{
-		$sql =$this->db->query("select r.*, e.nama_estimasi from realisasi r  join estimasi e on r.id_estimasi = e.id_estimasi");
-		return $sql;
-	}
-	public function getRealisasiNota()
-	{
-		$sql =$this->db->query("select r.*, n.no_nota from realisasi r  join nota n on r.id_nota = n.id_nota");
-		return $sql;
-	}
+	// public function getRealisasi()
+	// {
+	// 	$sql =$this->db->query("select r.*, e.nama_estimasi from realisasi r  join estimasi e on r.id_estimasi = e.id_estimasi");
+	// 	return $sql;
+	// }
+	// public function getRealisasiNota()
+	// {
+	// 	$sql =$this->db->query("select r.*, n.no_nota from realisasi r  join nota n on r.id_nota = n.id_nota");
+	// 	return $sql;
+	// }
 	public function delete($id_realisasi)
 	{
 		$this->db->where('id_realisasi',$id_realisasi);
@@ -39,10 +39,10 @@ class realisasi_model extends CI_Model {
 		$this->db->insert('realisasi',$data);
 	}
 
-private function _get_datatables_query($id_realisasi)
+private function _get_datatables_query()
 	{
 		$this->db->from($this->table);
-			$this->db->where('id_realisasi',$id_realisasi);	
+			//$this->db->where('id_realisasi',$id_realisasi);	
 	
 		
 		$i = 0;
@@ -79,18 +79,18 @@ private function _get_datatables_query($id_realisasi)
 		}
 	}
 
-	function get_datatables($id_realisasi)
+	function get_datatables()
 	{
-		$this->_get_datatables_query($id_realisasi);
+		$this->_get_datatables_query();
 		if($_POST['length'] != -1)
 		$this->db->limit($_POST['length'], $_POST['start']);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
-	function count_filtered($id_realisasi)
+	function count_filtered()
 	{
-		$this->_get_datatables_query($id_realisasi);
+		$this->_get_datatables_query();
 		$query = $this->db->get();
 		return $query->num_rows();
 	}
@@ -109,7 +109,16 @@ private function _get_datatables_query($id_realisasi)
 
 		return $query->row();
 	}
-
+	public function delete_by_id($id)
+	{
+		$this->db->where('id_realisasi', $id);
+		$this->db->delete($this->table);
+	}
+	public function update($where, $data)
+	{
+		$this->db->update($this->table, $data, $where);
+		return $this->db->affected_rows();
+	}
 
 
 

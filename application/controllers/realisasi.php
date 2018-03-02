@@ -18,13 +18,14 @@ public function __construct(){
 			"container" => "realisasi"
 		);
 		$data['op']='tambah';
-		$data['sql']=$this->realisasi_model->getRealisasi()->result();
-		$data['sql']=$this->realisasi_model->getRealisasiNota()->result();
+		// $data['sql']=$this->realisasi_model->getRealisasi()->result();
+		// $data['sql']=$this->realisasi_model->getRealisasiNota()->result();
 		$data['kegiatan']=$this->kegiatan_model->getKegiatan($id_users,$jabatan)->result();
 		$this->load->view("template", $data);
 	}
 	public function simpan()
 	{
+		print_r($_POST);
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
 		$op=$this->input->post("op");
@@ -38,9 +39,9 @@ public function __construct(){
 			'jenis'=> $jenis,
 			'nama_sie' => $nama_sie, 
 			'nama_realisasi' => $nama_realisasi, 
-			'banyak_realisasi' => $banyak_realisasi,
-			'harga_satuan_realisasi' => $harga_satuan_realisasi,
-			'id_nota' => $this->session->notadata['logged_in']['id_nota']
+			'banyak' => $banyak_realisasi,
+			'harga_satuan' => $harga_satuan_realisasi,
+			'id_nota' => $no_nota
 	
 		);
 			// echo $op;
@@ -98,22 +99,20 @@ public function __construct(){
 
 	public function ajax_list()
 	{
-		print_r($_POST);
-		exit();
-		$id_realisasi=$_POST['id_realisasi'];
-		$list = $this->realisasi_model->get_datatables($id_realisasi);
+		
+		$list = $this->realisasi_model->get_datatables();
 		$data = array();
 		$no = $_POST['start'];
 		foreach ($list as $realisasi) {
 			$no++;
-			$jumlah = $realisasi->banyak_realisasi*$realisasi->harga_satuan_realisasi;
-			$row = array();
+			$jumlah = $realisasi->banyak*$realisasi->harga_satuan;
+			$row = array();;
 			$row[] = $no;
 			$row[] = $realisasi->jenis;
 			$row[] = $realisasi->nama_sie;
 			$row[] = $realisasi->nama_realisasi;
-			$row[] = $realisasi->banyak_realisasi;
-			$row[] = 'Rp '. number_format($realisasi->harga_satuan_realisasi,2,',','.');
+			$row[] = $realisasi->banyak;
+			$row[] = 'Rp '. number_format($realisasi->harga_satuan,2,',','.');
 			$row[] = 'Rp '. number_format($jumlah,2,',','.');
 			$row[] = $realisasi->id_nota;
 			
@@ -127,7 +126,7 @@ public function __construct(){
 		$output = array(
 						"draw" => $_POST['draw'],
 						"recordsTotal" => $this->realisasi_model->count_all(),
-						"recordsFiltered" => $this->realisasi_model->count_filtered($id_realisasi),
+						"recordsFiltered" => $this->realisasi_model->count_filtered(),
 						"data" => $data,
 				);
 		//output to json format
@@ -148,60 +147,54 @@ public function __construct(){
 	public function ajax_add()
 	{
 		// $this->_validate();
+
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
-		$id_kegiatan=$this->input->post("id_kegiatan");
+		$id_estimasi=$this->input->post("id_estimasi");
 		$op=$this->input->post("op");
 		$nama_sie=$this->input->post("nama_sie");
 		$nama_realisasi=$this->input->post("nama_realisasi");
 		$banyak_realisasi=$this->input->post("banyak_realisasi");
 		$harga_satuan_realisasi=$this->input->post("harga_satuan_realisasi");
-		$no_nota=$this->input->post("no_nota");
+		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-			'id_kegiatan' => $id_kegiatan, 
+			
 			'jenis'=> $jenis,
+			'id_estimasi'=> $id_estimasi,
 			'nama_sie' => $nama_sie, 
 			'nama_realisasi' => $nama_realisasi, 
-			'banyak_realisasi' => $banyak_realisasi,
-			'harga_satuan_realisasi' => $harga_satuan_realisasi,
-			'no_nota' => $no_nota,
+			'banyak' => $banyak_realisasi,
+			'harga_satuan' => $harga_satuan_realisasi,
+			'id_nota' => $no_nota,
 		);
-		$this->session->set_flashdata('msg', 
-                '<div class="alert alert-success">
-                    <h4>Berhasil </h4>
-                    <p>data berhasil diubah</p>
-                </div>'); 
+		; 
 		$insert = $this->realisasi_model->save($data);
 
 		echo json_encode(array("status" => TRUE));
-		$this->session->set_flashdata('msg', 
-                '<div class="alert alert-success">
-                    <h4>Berhasil </h4>
-                    <p>data berhasil disimpan</p>
-                </div>');
 	}
 
 	public function ajax_update()
 	{
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
-		$id_kegiatan=$this->input->post("id_kegiatan");
+		$id_estimasi=$this->input->post("id_estimasi");
 		$op=$this->input->post("op");
 		$nama_sie=$this->input->post("nama_sie");
 		$nama_realisasi=$this->input->post("nama_realisasi");
 		$banyak_realisasi=$this->input->post("banyak_realisasi");
 		$harga_satuan_realisasi=$this->input->post("harga_satuan_realisasi");
-		$no_nota=$this->input->post("no_nota");
+		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-			'id_kegiatan' => $id_kegiatan, 
+			
 			'jenis'=> $jenis,
+			'id_estimasi'=> $id_estimasi,
 			'nama_sie' => $nama_sie, 
 			'nama_realisasi' => $nama_realisasi, 
-			'banyak_realisasi' => $banyak_realisasi,
-			'harga_satuan_realisasi' => $harga_satuan_realisasi,
-			'no_nota' => $no_nota,
+			'banyak' => $banyak_realisasi,
+			'harga_satuan' => $harga_satuan_realisasi,
+			'id_nota' => $no_nota,
 
 		);
 		$this->realisasi_model->update(array('id_realisasi' => $this->input->post('id_realisasi')), $data);

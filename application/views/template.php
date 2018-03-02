@@ -865,7 +865,7 @@ function pilih_nota(){
 
 		    });
 }
-function edit_nota(id){
+function edit_nota_1(id){
 	 $.ajax({
         url : "<?php echo site_url('datanota/ajax_pilih/')?>" + id,
         type: "GET",
@@ -873,6 +873,7 @@ function edit_nota(id){
         success: function(data)
         {
             $('[name="no_nota"]').val(data.no_nota);
+            $('[name="id_nota"]').val(data.id_nota);
             $('#notapilih').modal('hide'); // show bootstrap modal when complete loaded
             
         },
@@ -901,7 +902,7 @@ function delete_realisasi(id)
         	dataType: "JSON",
         	success: function(data)
         	{
-                reload_table_nota();
+                reload_table_realisasi();
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -927,13 +928,16 @@ function edit_realisasi(id)
         	// console.log(data);
         	console.log(jumlah);
             $('[name="id_realisasi"]').val(data.id_realisasi);
+            $('[name="id_estimasi"]').val(data.id_estimasi);
             $('[name="nama_realisasi"]').val(data.nama_realisasi);
-            $('[name="banyak_realisasi"]').val(data.banyak_realisasi);
+            $('[name="banyak_realisasi"]').val(data.banyak);
             $('[name="jenis"]').val(data.jenis);
             $('[name="nama_sie"]').val(data.nama_sie);
-            $('[name="harga_satuan_realisasi"]').val(data.harga_satuan_realisasi);
+            $('[name="harga_satuan_realisasi"]').val(data.harga_satuan);
             $('[name="jumlah"]').val(jumlah);
-            $('[name="no_nota"]').val(no_nota);
+            $('[name="no_nota"]').val(data.id_nota);
+            $('[name="id_nota"]').val(data.id_nota);
+            $('[name="op"]').val('edit');
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -942,7 +946,61 @@ function edit_realisasi(id)
         }
     });
 }
+function save_realisasi()
+{
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled',true); //set button disable 
+    var url;
 
+    if(save_method == 'update') {
+        url = "<?php echo site_url('realisasi/ajax_update')?>";
+    } else {
+        url = "<?php echo site_url('realisasi/ajax_add')?>";
+    }
+
+    // ajax adding data to database
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form').serialize(),
+        dataType: "JSON",
+        success: function(data)
+        {
+
+            if(data.status) //if success close modal and reload ajax table
+            {
+              // $('#form').clear();
+              $("#notifications" ).show();
+              $("#notifications" ).append( "<div class='alert alert-success'><h4>Berhasil </h4><p>data berhasil disimpan</p></div>" );
+              
+              $('#exampleModal').modal('hide');
+                reload_table_realisasi();
+                setInterval (function(){
+                	 $("#notifications" ).hide();
+                	},500);
+            }
+            else
+            {
+                for (var i = 0; i < data.inputerror.length; i++) 
+                {
+                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                }
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
+
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable 
+
+        }
+    });
+}
 
 
 </script>

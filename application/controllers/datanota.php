@@ -18,7 +18,7 @@ class datanota extends CI_Controller {
 		foreach ($list as $nota) {
 			$no++;
 			$row = array();
-			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_nota('."'".$nota->id_nota."'".')"><i class="glyphicon glyphicon-ok"></i>Pilih</a>';
+			$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_nota_1('."'".$nota->id_nota."'".')"><i class="glyphicon glyphicon-ok"></i>Pilih</a>';
 			$row[] = $nota->no_nota;
 			$row[] = '<img src="upload/'.$nota->gambar.'" style="hight:400px;width:400px" class="img-responsive">';
 			// $row[] = $nota->nama_kegiatan;
