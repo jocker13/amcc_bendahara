@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
               <label>Nomor Telp</label>
-              <input type="text" name="notelp"  id="notelp" class="form-control" required  oninvalid="this.setCustomValidity('Nomor Telp Harus Diisi')" oninput="setCustomValidity('')">
+              <input type="text" name="notelp"  id="notelp" class="form-control" required  oninvalid="this.setCustomValidity('Nomor Telp Harus Diisi')" onkeyup="this.value=this.value.replace(/[^\d]/,'')" oninput="setCustomValidity('')">
             </div>
             <div class="form-group" align="right">
               <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Simpan </button>

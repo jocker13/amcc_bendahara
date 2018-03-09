@@ -42,29 +42,30 @@
 		</div> 
 	</div><!--/.row-->
 
-	<div class="row" id="estimasi_tabel" style="display:none">
+	<div class="row" id="" style="display:none">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading" align="right">
-					<button class="btn btn-default" onclick="add_estimasi()"><i onclick="cetak_estimasi()" class="glyphicon glyphicon-print"></i> Cetak</button>
+					<button class="btn btn-default" onclick=""><i onclick="" class="glyphicon glyphicon-print"></i> Cetak</button>
 				</div>
 
 				<div class="panel-body">
 
 
-					<table id="tabel-estimasi" class="table table-bordered table-striped">
+					<table id="tabel-realisasi" class="table table-bordered table-striped">
 						
 						<thead>
                       <tr>
-                        <th style="background: dodgerblue; text-align: center;">NO</th>
-						<th style="background: dodgerblue; text-align: center;">JENIS</th>
-						<th style="background: dodgerblue; text-align: center;">NAMA SIE</th>
-						<th style="background: dodgerblue; text-align: center;">NAMA TRANSAKSI</th>
-						<th style="background: dodgerblue; text-align: center;"><b>BANYAK</b></th>
-						<th style="background: dodgerblue; text-align: center;"><b>HARGA SATUAN</b></th>
-						<th style="background: dodgerblue; text-align: center;"><b>JUMLAH</b></th>
-						<th style="background: dodgerblue; text-align: center;"><b>AKSI</b></th>
-
+							<tr style="background: dodgerblue; text-align: center;">
+							<th style="text-align: center;">No</th>
+							<th style="text-align: center;">Jenis</th>
+							<th style="text-align: center;">Nama Sie</th>
+							<th style="text-align: center;">Nama Transaksi</th>
+							<th style="text-align: center;">Banyak</th>
+							<th style="text-align: center;">Harga Satuan</th>
+							<th style="text-align: center;">Jumlah</th>
+							<th style="text-align: center;">No. Nota</th>
+							<th style="text-align: center;">Aksi</th>
                       </tr>
                     </thead>
 					</table>

@@ -143,7 +143,7 @@ header("location: login");
 						<li><a class="" href="<?php echo base_url('/laporanestimasi') ?>">
 							<span class="fa fa-arrow-right">&nbsp;</span> Estimasi
 						</a></li>
-						<li><a class="" href=" <?php echo base_url('/laporan_realisasi') ?>">
+						<li><a class="" href=" <?php echo base_url('/laporanrealisasi') ?>">
 							<span class="fa fa-arrow-right">&nbsp;</span> Realisasi
 						</a></li>
 						<?php if($level == 'admin' || $level == 'ketua'): ?>
@@ -555,6 +555,11 @@ function cetak_laporan_transaksi(id)
 
             	  window.open("<?php echo site_url('cetaktransaksi?bulan=')?>"+bulan+"&tahun="+tahun);
 }
+//cetak estimasi
+
+
+
+
 
 function edit_notabaru(id)
 {

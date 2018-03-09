@@ -101,11 +101,11 @@
 						</div>
 						<div class="form-group">
 							<label>Banyak</label>
-							<input type="text" name="banyak_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
+							<input type="text" name="banyak_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required  oninvalid="this.setCustomValidity('banyaknya harus diisi')" oninput="setCustomValidity('')"> 
 						</div>
 						<div class="form-group">
 							<label>Harga Satuan</label>
-							<input type="text" name="harga_satuan_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required> 
+							<input type="text" name="harga_satuan_realisasi" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" required  oninvalid="this.setCustomValidity('harga satuan harus diisi')" oninput="setCustomValidity('')"> 
 							
 						</div>
 						<!-- <div class="form-group">
