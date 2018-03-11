@@ -37,31 +37,31 @@ public function __construct(){
 		$no_nota=$this->input->post("no_nota");
 		$data = array(
 			'jenis'=> $jenis,
-			'nama_sie' => $nama_sie, 
-			'nama_realisasi' => $nama_realisasi, 
+			'nama_sie' => $nama_sie,
+			'nama_realisasi' => $nama_realisasi,
 			'banyak' => $banyak_realisasi,
 			'harga_satuan' => $harga_satuan_realisasi,
 			'id_nota' => $no_nota
-	
+
 		);
 			// echo $op;
 			// exit();
 		if ($op=="tambah") {
 			$this->realisasi_model->save($data);
-			$this->session->set_flashdata('msg', 
+			$this->session->set_flashdata('msg',
                 '<div class="alert alert-success">
                     <h4>Berhasil </h4>
                     <p>data berhasil disimpan</p>
-                </div>'); 
+                </div>');
 
 		}
 		else{
 			$this->realisasi_model->ubah($id_realisasi, $data);
-			$this->session->set_flashdata('msg', 
+			$this->session->set_flashdata('msg',
                 '<div class="alert alert-success">
                     <h4>Berhasil </h4>
                     <p>data berhasil diubah</p>
-                </div>'); 
+                </div>');
 		}
 
 		redirect('realisasi');
@@ -99,7 +99,7 @@ public function __construct(){
 
 	public function ajax_list()
 	{
-		
+
 		$list = $this->realisasi_model->get_datatables();
 		$data = array();
 		$no = $_POST['start'];
@@ -114,12 +114,12 @@ public function __construct(){
 			$row[] = $realisasi->banyak;
 			$row[] = 'Rp '. number_format($realisasi->harga_satuan,2,',','.');
 			$row[] = 'Rp '. number_format($jumlah,2,',','.');
-			$row[] = $realisasi->id_nota;
-			
+			$row[] = $realisasi->no_nota;
+
 			//add html for action
 			$row[] = '<a class="btn btn-sm btn-warning" href="javascript:void(0)" title="Edit" onclick="edit_realisasi('."'".$realisasi->id_realisasi."'".')"><i class="glyphicon glyphicon-pencil"></i> Ubah</a>
 				  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_realisasi('."'".$realisasi->id_realisasi."'".')"><i class="glyphicon glyphicon-trash"></i> Hapus</a>';
-		
+
 			$data[] = $row;
 		}
 
@@ -159,16 +159,16 @@ public function __construct(){
 		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-			
+
 			'jenis'=> $jenis,
 			'id_estimasi'=> $id_estimasi,
-			'nama_sie' => $nama_sie, 
-			'nama_realisasi' => $nama_realisasi, 
+			'nama_sie' => $nama_sie,
+			'nama_realisasi' => $nama_realisasi,
 			'banyak' => $banyak_realisasi,
 			'harga_satuan' => $harga_satuan_realisasi,
 			'id_nota' => $no_nota,
 		);
-		; 
+		;
 		$insert = $this->realisasi_model->save($data);
 
 		echo json_encode(array("status" => TRUE));
@@ -187,11 +187,11 @@ public function __construct(){
 		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-			
+
 			'jenis'=> $jenis,
 			'id_estimasi'=> $id_estimasi,
-			'nama_sie' => $nama_sie, 
-			'nama_realisasi' => $nama_realisasi, 
+			'nama_sie' => $nama_sie,
+			'nama_realisasi' => $nama_realisasi,
 			'banyak' => $banyak_realisasi,
 			'harga_satuan' => $harga_satuan_realisasi,
 			'id_nota' => $no_nota,

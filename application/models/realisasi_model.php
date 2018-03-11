@@ -41,17 +41,19 @@ class realisasi_model extends CI_Model {
 
 private function _get_datatables_query()
 	{
-		$this->db->from($this->table);
-			//$this->db->where('id_realisasi',$id_realisasi);	
-	
-		
+		// $this->db->from($this->table);
+			//$this->db->where('id_realisasi',$id_realisasi);
+			$this->db->select('realisasi.*,nota.no_nota')
+					 ->from('realisasi')
+					 ->join('nota','realisasi.id_nota=nota.id_nota');
+
 		$i = 0;
-	
-		foreach ($this->column_search as $item) // loop column 
+
+		foreach ($this->column_search as $item) // loop column
 		{
 			if($_POST['search']['value']) // if datatable send POST for search
 			{
-				
+
 				if($i===0) // first loop
 				{
 					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
@@ -67,11 +69,11 @@ private function _get_datatables_query()
 			}
 			$i++;
 		}
-		
+
 		if(isset($_POST['order'])) // here order processing
 		{
 			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} 
+		}
 		else if(isset($this->order))
 		{
 			$order = $this->order;
