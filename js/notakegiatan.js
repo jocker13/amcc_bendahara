@@ -33,7 +33,7 @@ notakegiatan = $('#notakegiatan').DataTable({
     	{
             // ajax delete data to database
             $.ajax({
-            	url : "nota/ajax_delete"+id,
+            	url : "nota/ajax_delete/"+id,
             	type: "POST",
             	dataType: "JSON",
             	success: function(data)
@@ -54,7 +54,7 @@ notakegiatan = $('#notakegiatan').DataTable({
 
         //Ajax Load data from ajax
         $.ajax({
-        	url : "nota/ajax_edit"+id,
+        	url : "nota/ajax_edit/"+id,
         	type: "GET",
         	dataType: "JSON",
         	success: function(data)
@@ -64,7 +64,7 @@ notakegiatan = $('#notakegiatan').DataTable({
         		$('#id_kegiatan').val(data.id_kegiatan);
         		$('#id_nota').val(data.id_nota);
         		$('#no_nota').val(data.no_nota);
-        		$('#img-upload').attr('src','<?php echo site_url('upload/')?>/'+data.gambar);
+        		$('#img-upload').attr('src','upload/'+data.gambar);
         		$('#op').val('edit');
             },
             error: function (jqXHR, textStatus, errorThrown)

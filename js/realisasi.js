@@ -1,7 +1,6 @@
 var realisasi;
 var save_method;
 
-
 realisasi = $('#tabel-realisasi').DataTable({
 
         "processing": true, //Feature control the processing indicator.
@@ -27,7 +26,8 @@ realisasi = $('#tabel-realisasi').DataTable({
 //realisai pilih estimasinya
 function pilihestimasi(){
 	$('#estimasipilih').modal('show');
-	id_kegiatan=$('#id_kegiatan').val();
+    id_kegiatan=$('#id_kegiatan').val();
+	// $('#id_kegiatan_save').val(id_kegiatan);
 	dataestimasi = $('#estimasidata').DataTable({
 				destroy: true,
 		        "processing": true, //Feature control the processing indicator.

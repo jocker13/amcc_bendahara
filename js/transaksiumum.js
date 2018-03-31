@@ -71,5 +71,5 @@ $('#tampiltran').on('click',function(){
     	var tahun = $("#tahun").val();
     	console.log(tahun);
 
-                	  window.open("<?php echo site_url('cetaktransaksi?bulan=')?>"+bulan+"&tahun="+tahun);
+                	  window.open("cetaktransaksi?bulan="+bulan+"&tahun="+tahun);
     }

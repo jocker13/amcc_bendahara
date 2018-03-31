@@ -43,6 +43,7 @@ table {
 	border-collapse: collapse;
 	width: 100%;
 	font-size: 9pt;
+	 page-break-inside : avoid ;
 }
 
 table, th, td {
@@ -91,6 +92,7 @@ body{
 	background-position: right top;
 	background-attachment:fixed;*/
 }
+
 .column {
 	float: left;
 	width: 50%;

@@ -33,7 +33,7 @@
 								<div class="form-group">
 
 									<br>
-									<button  onclick="show()" id="tampil" class="btn btn-primary">Tampilkan</button>
+									<button  onclick="show()" id="tampillaporan" class="btn btn-primary">Tampilkan</button>
 								</div>  
 							</div>
 					</div>
@@ -46,7 +46,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading" align="right">
-					<button class="btn btn-default" onclick="add_estimasi()"><i onclick="cetak_estimasi()" class="glyphicon glyphicon-print"></i> Cetak</button>
+					<button class="btn btn-default" onclick="cetak_laporan_estimasi()" ><i  class="glyphicon glyphicon-print"></i> Cetak</button>
 				</div>
 
 				<div class="panel-body">
@@ -63,7 +63,7 @@
 						<th style="background: dodgerblue; text-align: center;"><b>BANYAK</b></th>
 						<th style="background: dodgerblue; text-align: center;"><b>HARGA SATUAN</b></th>
 						<th style="background: dodgerblue; text-align: center;"><b>JUMLAH</b></th>
-						<th style="background: dodgerblue; text-align: center;"><b>AKSI</b></th>
+						
 
                       </tr>
                     </thead>

@@ -33,26 +33,26 @@
 								<div class="form-group">
 
 									<br>
-									<button  onclick="show()" id="tampil" class="btn btn-primary">Tampilkan</button>
+									<button  onclick="tampil_realiasai_laporan()" id="tampillaporanrealisasi" class="btn btn-primary">Tampilkan</button>
 								</div>  
 							</div>
 					</div>
 				</div>
-			</div> 
+			</div>
 		</div> 
 	</div><!--/.row-->
 
-	<div class="row" id="" style="display:none">
+	<div class="row" id="laporan_realisasi_tabel" style="display:none">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading" align="right">
-					<button class="btn btn-default" onclick=""><i onclick="" class="glyphicon glyphicon-print"></i> Cetak</button>
+					<button class="btn btn-default" onclick="cetak_laporan_realisasi()"><i class="glyphicon glyphicon-print"></i> Cetak</button>
 				</div>
 
 				<div class="panel-body">
 
 
-					<table id="tabel-realisasi" class="table table-bordered table-striped">
+					<table id="tabel-realisasi-laporan" class="table table-bordered table-striped">
 						
 						<thead>
                       <tr>
@@ -65,7 +65,6 @@
 							<th style="text-align: center;">Harga Satuan</th>
 							<th style="text-align: center;">Jumlah</th>
 							<th style="text-align: center;">No. Nota</th>
-							<th style="text-align: center;">Aksi</th>
                       </tr>
                     </thead>
 					</table>
@@ -75,9 +74,9 @@
 	</div> <!--End .TABEL-->
 
 	<script type="text/javascript">
-		var realisasi_div=document.getElementById('estimasi_tabel');
-		function show() {
-			realisasi_div.style['display']='block';
+		var lappranrealisasi_div=document.getElementById('laporan_realisasi_tabel');
+		function tampil_realiasai_laporan() {
+			lappranrealisasi_div.style['display']='block';
 		}
 
 

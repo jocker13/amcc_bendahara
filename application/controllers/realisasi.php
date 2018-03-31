@@ -29,6 +29,7 @@ public function __construct(){
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
 		$op=$this->input->post("op");
+		$id_kegiatan=$this->input->post("id_kegiatan");
 		$nama_sie=$this->input->post("nama_sie");
 		$nama_realisasi=$this->input->post("nama_realisasi");
 		$banyak_realisasi=$this->input->post("banyak_realisasi");
@@ -36,6 +37,7 @@ public function __construct(){
 		$jumlah=$this->input->post("jumlah");
 		$no_nota=$this->input->post("no_nota");
 		$data = array(
+			'id_kegiatan'=>$id_kegiatan,
 			'jenis'=> $jenis,
 			'nama_sie' => $nama_sie,
 			'nama_realisasi' => $nama_realisasi,
@@ -147,7 +149,7 @@ public function __construct(){
 	public function ajax_add()
 	{
 		// $this->_validate();
-
+		$id_kegiatan=$this->input->post("id_kegiatan");
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
 		$id_estimasi=$this->input->post("id_estimasi");
@@ -159,7 +161,7 @@ public function __construct(){
 		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-
+			'id_kegiatan'=>$id_kegiatan,
 			'jenis'=> $jenis,
 			'id_estimasi'=> $id_estimasi,
 			'nama_sie' => $nama_sie,
@@ -176,6 +178,7 @@ public function __construct(){
 
 	public function ajax_update()
 	{
+		$id_kegiatan=$this->post("id_kegiatan");
 		$jenis=$this->input->post("jenis");
 		$id_realisasi=$this->input->post("id_realisasi");
 		$id_estimasi=$this->input->post("id_estimasi");
@@ -187,7 +190,7 @@ public function __construct(){
 		$no_nota=$this->input->post("id_nota");
 		$jumlah=$this->input->post("jumlah");
 		$data = array(
-
+			'id_kegiatan'=>$id_kegiatan,
 			'jenis'=> $jenis,
 			'id_estimasi'=> $id_estimasi,
 			'nama_sie' => $nama_sie,

@@ -74,9 +74,9 @@
 	</div> <!--End .TABEL-->
 
 	<script type="text/javascript">
-		var realisasi_div=document.getElementById('estimasi_tabel');
+		var estimasi_div=document.getElementById('estimasi_tabel');
 		function show() {
-			realisasi_div.style['display']='block';
+			estimasi_div.style['display']='block';
 		}
 
 

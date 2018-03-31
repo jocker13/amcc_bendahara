@@ -70,7 +70,7 @@ hr {
 	}
 	body{
 		margin-bottom: 50mm !important;
-		background: url(assets/img/back1.png)   !important;
+		/*background: url(assets/img/back1.png)   !important;*/
 	background-size: 100% !important;
 	background-repeat:repeat-y;
 	background-position: right top;
@@ -81,7 +81,7 @@ hr {
     margin-top: 1cm;
     margin-left:  0cm;
     margin-right:  0cm;
-    margin-bottom: 0cm;
+    margin-bottom: 4cm;
  }
 
 body{
@@ -108,20 +108,29 @@ body{
 </style>
 <body>
 
-	
+<?php 
+$nama_kegiatan='';
+$nim='';
+$nama='';
+	foreach ($kegiatan as $value) {
+		$nama_kegiatan = $value->nama_kegiatan;
+		$nim = $value->nim;
+		$nama = $value->nama;
+	}
+ ?>	
 	
 
 
 	<br>
 	<h4 style="text-align: center;">ESTIMASI DANA</h4>
-	<H4 style="text-align: center;"> NAMA KEGIATAN</H4>
-	<br>
+	<H4 style="text-align: center;"><?php echo strtoupper($nama_kegiatan)?></H4>
+	<!-- <br> -->
 	<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
 	<h5><u>PEMASUKAN</u></h5>
 		<table >
 			<thead>
 			<tr>
-				<th rowspan="2" style="background: dodgerblue; text-align: center;">SUMBER DANA</th>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">SUMBER DANA</th>
 				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 			</tr>
 		</thead>
@@ -133,32 +142,34 @@ body{
 				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">12</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">12000</td>	
-			</tr>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">1</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">1000</td>
-			</tr>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">3</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">3000</td>
-			</tr>
+			<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total=0;
+			foreach ($sql as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total +=$estimasi->total;
+			}
+			?>
 			<tr>
 				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
 				<td style="background: dodgerblue;"></td>
 				<td style="background: dodgerblue;"></td>
-				<td style="text-align: center; background: dodgerblue;""><b>3000</b></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total,2,',','.')?></b></td>
 			</tr>
-		</tbody>
+				</tbody>
+				
 </table>
 
 
@@ -166,7 +177,7 @@ body{
 		<table >
 			<thead>
 			<tr>
-				<th rowspan="2" style="background: dodgerblue; text-align: center;">KESEKRETARIATAN</th>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">KESEKRETARIATAN</th>
 				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 			</tr>
 		</thead>
@@ -178,60 +189,341 @@ body{
 				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">12</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">12000</td>	
-			</tr>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">1</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">1000</td>
-			</tr>
-			<tr>
-				<td>Nama Transaksinya</td>
-				<td style="text-align: center;">3</td>
-				<td style="text-align: center;">1000</td>
-				<td style="text-align: center;">3000</td>
-			</tr>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_kesekretariatan=0;
+			foreach ($sqlkesekretariatan as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_kesekretariatan +=$estimasi->total;
+			}
+			?>
 			<tr>
 				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
 				<td style="background: dodgerblue;"></td>
 				<td style="background: dodgerblue;"></td>
-				<td style="text-align: center; background: dodgerblue;""><b>3000</b></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_kesekretariatan,2,',','.')?></b></td>
 			</tr>
-		</tbody>
+				</tbody>
+				
 </table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%; ">KONSUMSI</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_konsumsi=0;
+			foreach ($sqlkonsumsi as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_konsumsi +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_konsumsi,2,',','.')?></b></td>
+			</tr>
+				</tbody>
+				
+</table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">ACARA</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_acara=0;
+			foreach ($sqlacara as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_acara +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+			<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_acara,2,',','.')?></td>
+			</tr>
+				</tbody>
+				
+</table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">PDD</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_pdd=0;
+			foreach ($sqlpdd as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_pdd +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_pdd,2,',','.')?></b></td>
+			</tr>
+				</tbody>
+				
+</table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">PERLENGKAPAN</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_perlengkapan=0;
+			foreach ($sqlperlengkapan as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_perlengkapan +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_perlengkapan,2,',','.')?></b></td>
+			</tr>
+				</tbody>
+				
+</table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">HUMAS</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_humas=0;
+			foreach ($sqlhumas as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_humas +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_humas,2,',','.')?></b></td>
+			</tr>
+				</tbody>
+				
+</table>
+</br>
+<table >
+			<thead>
+			<tr>
+				<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">P3K</th>
+				<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
+			</tr>
+		</thead>
+			<thead>
+			<tr>
+				<th style="background: dodgerblue; text-align: center;"></th>
+				<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+				<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+				<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+			</tr>
+		</thead>
+				<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_p3k=0;
+			foreach ($sqlp3k as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+				<tbody>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="center"><?php echo $estimasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($estimasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+
+					</tr>
+					<?php
+					$sub_total_p3k +=$estimasi->total;
+			}
+			?>
+			<tr>
+				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;""><b>Rp <?php echo  number_format($sub_total_p3k,2,',','.')?></b></td>
+			</tr>
+				</tbody>
+				
+</table>
+
 
 <h5>REKAPITULASI ESTIMASI PEMASUKAN DAN PENGELUARAN DANA</h5>
 		<table>
 			<thead>
 			<tr>
-				<th rowspan="" style="background: dodgerblue; text-align: left;">PEMASUKAN</th>
-				<th colspan="" style="background: dodgerblue; text-align: center;"></th>			
+				<th rowspan="" style="background: dodgerblue; text-align: left; ">PEMASUKAN</th>
+			<th colspan="" style="background: dodgerblue; text-align: center;"></th>			
 				<th colspan="" style="background: dodgerblue; text-align: center;"></th>			
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Subsidi Lembaga</td>
-				<td>1000000</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>Subsidi Lembaga</td>
-				<td>500000</td>
-				<td></td>
-			</tr>
+			<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_pemasukan=0;
+			foreach ($sql as $estimasi) {
+				$no++;
+				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
+				?>
+					<tr>
+						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+						<td></td>
+
+					</tr>
+					<?php
+					$sub_total_pemasukan +=$estimasi->total;
+			}
+			?>
 		</tbody>
 			<thead>
 			<tr>
 				<th rowspan="" style="background: limegreen; text-align: center;">TOTAL PEMASUKAN</th>
 				<th colspan="" style="background: limegreen; text-align: center;"></th>			
-				<th colspan="" style="background: limegreen; text-align: center;">xxx</th>			
+				<th colspan="" style="background: limegreen; text-align: right;">Rp <?php echo  number_format($sub_total_pemasukan,2,',','.')?></th>			
 			</tr>
 		</thead>
 			<thead>
@@ -243,39 +535,57 @@ body{
 		</thead>
 		<tbody>
 			<tr>
-				<td>SEKRETARIS</td>
-				<td>1000000</td>
+				<td>KESEKRETARIATAN</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_kesekretariatan,2,',','.')?></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>KONSUMSI</td>
-				<td>500000</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_konsumsi,2,',','.')?></td>
 				<td></td>
 			</tr>
 			<tbody>
 			<tr>
 				<td>ACARA</td>
-				<td>1000000</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_acara,2,',','.')?></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td>PDD</td>
-				<td>500000</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_pdd,2,',','.')?></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>PERLENGKAPAN</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_perlengkapan,2,',','.')?></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>HUMAS</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_humas,2,',','.')?></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>P3K</td>
+				<td align="right">Rp <?php echo  number_format($sub_total_p3k,2,',','.')?></td>
 				<td></td>
 			</tr>
 		</tbody>
+		<?php
+			$total_pengeluaran = $sub_total_kesekretariatan+$sub_total_konsumsi+$sub_total_acara+$sub_total_pdd+$sub_total_perlengkapan+$sub_total_humas+$sub_total_p3k;
+		?>
 		<thead>
 			<tr>
 				<th rowspan="" style="background: limegreen; text-align: center;">TOTAL PENGELUARAN</th>
 				<th colspan="" style="background: limegreen; text-align: center;"></th>			
-				<th colspan="" style="background: limegreen; text-align: center;">xxx</th>			
+				<th colspan="" style="background: limegreen; text-align: right;">Rp <?php echo  number_format($total_pengeluaran,2,',','.')?></th>			
 			</tr>
 		</thead>
 		<thead>
 			<tr>
 				<th rowspan="" style="background: limegreen; text-align: center;">SALDO</th>
 				<th colspan="" style="background: limegreen; text-align: center;"></th>			
-				<th colspan="" style="background: limegreen; text-align: center;">saldo</th>			
+				<th colspan="" style="background: limegreen; text-align: right;">Rp <?php echo  number_format(($sub_total_pemasukan-$total_pengeluaran),2,',','.')?></th>			
 			</tr>
 		</thead>
 </table>
@@ -302,8 +612,8 @@ body{
 					<br>
 					<br>
 					<br>
-					<u>Nafa Diniah</u><br>
-					<a>14.12.8008</a>
+					<u><?php echo $nama?></u><br>
+					<a><?php echo $nim?></a>
 				</div>
 			</div>
 		</div>

@@ -176,6 +176,8 @@ header("location: login");
 		<script type="text/javascript" charset="utf8" src="<?php echo base_url('js/estimasi.js')?>"></script>
 		<script type="text/javascript" charset="utf8" src="<?php echo base_url('js/realisasi.js')?>"></script>
 		<script type="text/javascript" charset="utf8" src="<?php echo base_url('js/transaksiumum.js')?>"></script>
+		<script type="text/javascript" charset="utf8" src="<?php echo base_url('js/laporanestimasi.js')?>"></script>
+		<script type="text/javascript" charset="utf8" src="<?php echo base_url('js/laporanrealisasi.js')?>"></script>
 
 
 

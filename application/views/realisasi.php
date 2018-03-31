@@ -13,11 +13,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">Estimasi</div>
 			<div class="panel-body">
-				<form role="form">
+				<form action="#" id="form" >
 					<div class="form-group">
 						<label>NAMA KEGIATAN</label>
 
-						<select class="form-control" id="id_kegiatan" name="kegiatan" >
+						<select class="form-control" id="id_kegiatan" name="id_kegiatan" >
 							<option value="" >-- pilih kegiatan --</option>
 							<?php 
 							foreach ($kegiatan as $nama) {
@@ -59,7 +59,7 @@
 						<input type="text" name="jumlah" id="jumlah" class="form-control" disabled="">
 					</div>
 
-				</form> 
+				 
 				<div class="clear"></div>
 			</div><!--End .article-->
 		</div>
@@ -70,7 +70,7 @@
 		<div class="panel panel-default">
 				<div class="panel-heading">Input Data Realisasi</div>
 				<div class="panel-body">
-					<form action="#" id="form" >
+					
 						<div class="form-group">
 							<label>Jenis</label>
 								<select class="form-control" name="jenis">
@@ -95,6 +95,7 @@
 							<label>Nama Transaksi</label>
 							<input type="text" name="nama_realisasi" class="form-control" required>
 							<input type="hidden" name="op" class="form-control" value="tambah" required>
+							<!-- <input type="hidden" name="id_kegiatan" id="id_kegiatan_save" class="form-control" required> -->
 							<input type="hidden" name="id_realisasi" class="form-control" required>
 							<input type="hidden" name="id_estimasi" id="id_estimasi"  class="form-control">
 
