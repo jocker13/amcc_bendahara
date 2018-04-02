@@ -87,5 +87,5 @@ notabaru = $('#table-notabaru').DataTable({
       {
       		console.log(id);
 
-                  	 window.open("<?php echo site_url('cetaknotabaru?id_notabaru=')?>"+id);
+                  	 window.open("cetaknotabaru?id_notabaru="+id);
       }

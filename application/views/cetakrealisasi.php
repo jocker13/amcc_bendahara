@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<center>
-		<div class="head-cetak" >    
-			<div id="logo">
-				<img src="<?php echo base_url('assets/img/logo.png') ?>"/>
-			</div>
-			<div id="head-cetak-logo">
-				<div style="font-size: 19px; font-weight: bold;"> AMIKOM COMPUTER CLUB(AMCC)</br></dir>
-					<div style="font-size: 24px;  font-weight: bold;">UNIVERSITAS AMIKOM YOGYAKARTA</br></div>
-					<div style="font-size: 13px"> Sekretariat : Jl. Ringroad Utara, Condong Catur, Depok, Sleman, Yogyakarta </br></div>
-					<div style="font-size: 13px">   Telp (0274)884201 ext 612 Email: amcc@amikom.ac.id Web : www.amcc.or.id<br></div>
-				</div>
-			</br>
-			<hr width="100%" color="#00BFFF">
-		</div>    
-	</center> 
+	
 	<link rel="stylesheet" type="text/css" href="screen.css" media="screen, print" />
 	<link rel="stylesheet" type="text/css" href="print.css" media="print" />
 	<title>AMCC</title>
@@ -68,20 +54,23 @@ hr {
 		-webkit-print-color-adjust: exact !important; /*Chrome, Safari */
 		color-adjust: exact !important;  /*Firefox*/
 	}
-	body{
-		margin-bottom: 50mm !important;
-		background: url(assets/img/back1.png)   !important;
+body{
+	margin-bottom: 4cm !important;
+/*	background: url(assets/img/back1.png)   !important;*/
 	background-size: 100% !important;
 	background-repeat:repeat-y;
 	background-position: right top;
 	background-attachment:fixed;
+	height: 100%;
+	width: 100%;
+
 	}
 }
 @page {
     margin-top: 1cm;
     margin-left:  0cm;
     margin-right:  0cm;
-    margin-bottom: 0cm;
+    margin-bottom: 4cm;
  }
 
 body{
@@ -104,16 +93,38 @@ body{
 	display: table;
 	clear: both;
 }
-
+table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td {
+	border: none !important;
+}
 </style>
+
 <body>
-
-	
-	
-
-
-	<br>
-	<h4 style="text-align: center;">REALISASI DANA</h4>
+	<table class="table-container">
+		<thead>
+			<tr>
+				<td style="width: 100vw;">
+					<center>
+		<div class="head-cetak" >    
+			<div id="logo">
+				<img src="<?php echo base_url('assets/img/logo.png') ?>"/>
+			</div>
+			<div id="head-cetak-logo">
+				<div style="font-size: 19px; font-weight: bold;"> AMIKOM COMPUTER CLUB(AMCC)</br></dir>
+					<div style="font-size: 24px;  font-weight: bold;">UNIVERSITAS AMIKOM YOGYAKARTA</br></div>
+					<div style="font-size: 13px"> Sekretariat : Jl. Ringroad Utara, Condong Catur, Depok, Sleman, Yogyakarta </br></div>
+					<div style="font-size: 13px">   Telp (0274)884201 ext 612 Email: amcc@amikom.ac.id Web : www.amcc.or.id<br></div>
+				</div>
+			</br>
+			<hr width="100%" color="#00BFFF">
+		</div>    
+	</center> 
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<h4 style="text-align: center;">REALISASI DANA</h4>
 	<H4 style="text-align: center;"> NAMA KEGIATAN</H4>
 	<br>
 	<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
@@ -804,5 +815,11 @@ body{
 			</div>
 		</div>
 	</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	
 </body>
 </html>

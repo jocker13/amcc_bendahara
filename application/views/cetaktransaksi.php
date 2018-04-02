@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<center>
-		<div class="head-cetak" >    
-			<div id="logo">
-				<img src="<?php echo base_url('assets/img/logo.png') ?>"/>
-			</div>
-			<div id="head-cetak-logo">
-				<div style="font-size: 19px; font-weight: bold;"> AMIKOM COMPUTER CLUB(AMCC)</br></dir>
-					<div style="font-size: 24px;  font-weight: bold;">UNIVERSITAS AMIKOM YOGYAKARTA</br></div>
-					<div style="font-size: 13px"> Sekretariat : Jl. Ringroad Utara, Condong Catur, Depok, Sleman, Yogyakarta </br></div>
-					<div style="font-size: 13px">   Telp (0274)884201 ext 612 Email: amcc@amikom.ac.id Web : www.amcc.or.id<br></div>
-				</div>
-			</br>
-			<hr width="100%" color="#00BFFF">
-		</div>    
-	</center> 
+<head>	
 	<link rel="stylesheet" type="text/css" href="screen.css" media="screen, print" />
 	<link rel="stylesheet" type="text/css" href="print.css" media="print" />
 	<title>AMCC</title>
@@ -43,7 +28,7 @@ table {
 	border-collapse: collapse;
 	width: 100%;
 	font-size: 9pt;
-	 page-break-inside : avoid ;
+	page-break-inside : avoid ;
 }
 
 table, th, td {
@@ -71,26 +56,18 @@ hr {
 	}
 	body{
 		margin-bottom: 50mm !important;
-		background: url(assets/img/back1.png)   !important;
-	background-size: 100% !important;
-	background-repeat:repeat-y;
-	background-position: right top;
-	background-attachment:fixed;
+		/*background: url(assets/img/back1.png)   !important;*/
+		background-size: 100% !important;
+		background-repeat:repeat-y;
+		background-position: right top;
+		background-attachment:fixed;
 	}
 }
 @page {
-    margin-top: 1cm;
-    margin-left:  0cm;
-    margin-right:  0cm;
-    margin-bottom: 0cm;
- }
-
-body{
-	/*background: url(assets/img/back.png)   !important;*/
-	/*background-size: 100% !important;
-	background-repeat:no-repeat;
-	background-position: right top;
-	background-attachment:fixed;*/
+	margin-top: 1cm;
+	margin-left:  0cm;
+	margin-right:  0cm;
+	margin-bottom: 0cm;
 }
 
 .column {
@@ -107,96 +84,123 @@ body{
 	clear: both;
 }
 
+table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td {
+	border: none !important;
+}
+
 </style>
 <body>
+	<table class="table-container">
+		<thead>
+			<tr>
+				<td style="width: 100vw;">
+					<center>
+						<div class="head-cetak" >    
+							<div id="logo">
+								<img src="<?php echo base_url('assets/img/logo.png') ?>"/>
+							</div>
+							<div id="head-cetak-logo">
+								<div style="font-size: 19px; font-weight: bold;"> AMIKOM COMPUTER CLUB(AMCC)</br></dir>
+									<div style="font-size: 24px;  font-weight: bold;">UNIVERSITAS AMIKOM YOGYAKARTA</br></div>
+									<div style="font-size: 13px"> Sekretariat : Jl. Ringroad Utara, Condong Catur, Depok, Sleman, Yogyakarta </br></div>
+									<div style="font-size: 13px">   Telp (0274)884201 ext 612 Email: amcc@amikom.ac.id Web : www.amcc.or.id<br></div>
+								</div>
+							</br>
+							<hr width="100%" color="#00BFFF">
+						</div>    
+					</center> 
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<h2 style="text-align: center;">TRANSAKSI UMUM</h2>
+					<br>
+					<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
 
-	
-	
+						<table >
+							<thead style="background: dodgerblue; text-align: center; ">
+								<tr>
+									<th style="background: dodgerblue; text-align: center;">NO</th>
+									<th style="background: dodgerblue; text-align: center;">TANGGAL</th>
+									<th style="background: dodgerblue; text-align: center;">NAMA TRANSAKSI</th>
+									<th style="background: dodgerblue; text-align: center;">JENIS</th>
+									<th style="background: dodgerblue; text-align: center;">NAMA SIE</th>
+									<th style="background: dodgerblue; text-align: center;">BANYAK</th>
+									<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
+									<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
+									<th style="background: dodgerblue; text-align: center;">SALDO</th>
+								</tr>
+							</thead>
+							<?php
+							$no=0;
+							foreach ($sql as $nota) {
+								$no++;
+								$jumlah=$nota->harga_satuan*$nota->banyak;
+								?>
+								<tbody>
+									<tr>
+										<td align="center"><?php echo $no ?> </td>
+										<td align="center"><?php echo $nota->tanggal  ?> </td>
+										<td><?php echo $nota->nama_transaksi ?> </td>
+										<td><?php echo $nota->jenis ?> </td>
+										<td><?php echo $nota->nama_sie ?> </td>
+										<td align="center"><?php echo $nota->banyak ?> </td>
+										<td align="right">Rp <?php echo  number_format($nota->harga_satuan,2,',','.') ?></td>
+										<td align="right">Rp <?php  echo  number_format($jumlah,2,',','.') ?> </td>
+										<td align="right">Rp <?php echo  number_format($nota->saldo,2,',','.') ?> </td>
 
+									</tr>
+								</tbody>
+								<?php
 
-	<br>
-	<h2 style="text-align: center;">TRANSAKSI UMUM</h2>
-	<br>
-	<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
-
-		<table >
-			<thead style="background: dodgerblue; text-align: center; ">
-				<tr>
-					<th style="background: dodgerblue; text-align: center;">NO</th>
-					<th style="background: dodgerblue; text-align: center;">TANGGAL</th>
-					<th style="background: dodgerblue; text-align: center;">NAMA TRANSAKSI</th>
-					<th style="background: dodgerblue; text-align: center;">JENIS</th>
-					<th style="background: dodgerblue; text-align: center;">NAMA SIE</th>
-					<th style="background: dodgerblue; text-align: center;">BANYAK</th>
-					<th style="background: dodgerblue; text-align: center;">HARGA SATUAN</th>
-					<th style="background: dodgerblue; text-align: center;">JUMLAH</th>
-					<th style="background: dodgerblue; text-align: center;">SALDO</th>
-				</tr>
-			</thead>
-			<?php
-			$no=0;
-			foreach ($sql as $nota) {
-				$no++;
-				$jumlah=$nota->harga_satuan*$nota->banyak;
-				?>
-				<tbody>
-					<tr>
-						<td align="center"><?php echo $no ?> </td>
-						<td align="center"><?php echo $nota->tanggal  ?> </td>
-						<td><?php echo $nota->nama_transaksi ?> </td>
-						<td><?php echo $nota->jenis ?> </td>
-						<td><?php echo $nota->nama_sie ?> </td>
-						<td align="center"><?php echo $nota->banyak ?> </td>
-						<td align="right">Rp <?php echo  number_format($nota->harga_satuan,2,',','.') ?></td>
-						<td align="right">Rp <?php  echo  number_format($jumlah,2,',','.') ?> </td>
-						<td align="right">Rp <?php echo  number_format($nota->saldo,2,',','.') ?> </td>
-
-					</tr>
-				</tbody>
-				<?php
-
-			}
-			?>
-		</table>
-		<br>
-		<br>
-		<?php 
-		foreach ($ketua as $ket) {
-			$nama_ketua=$ket->nama;
-			$nim_ketua=$ket->nim;
-		}
-		?>
-		<?php 
-		foreach ($admin as $ad) {
-			$nama_admin=$ad->nama;
-			$nim_admin=$ad->nim;
-		}
-		?>
-		<div class="row">
-			<div class="col-md-6">
-				<div align="center" class="column" >
-					<br>
-					<br>
-					<p>Ketua AMCC,</p>
-					<br>
-					<br>
-					<br>
-					<u><?php echo $nama_ketua; ?></u><br>
-					<a><?php echo $nim_ketua; ?></a>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div align="center" class="column" >
-					<p>Yogyakarta, <?php echo date("d-m-Y"); ?></p>
-					<p>Bendahara AMCC,</p>
-					<br>
-					<br>
-					<br>
-					<u><?php echo $nama_admin; ?></u><br>
-					<a><?php echo $nim_admin; ?></a>
-				</div>
-			</div>
-		</div>
-	</div>
+							}
+							?>
+						</table>
+						<br>
+						<br>
+						<?php 
+						foreach ($ketua as $ket) {
+							$nama_ketua=$ket->nama;
+							$nim_ketua=$ket->nim;
+						}
+						?>
+						<?php 
+						foreach ($admin as $ad) {
+							$nama_admin=$ad->nama;
+							$nim_admin=$ad->nim;
+						}
+						?>
+						<div class="row">
+							<div class="col-md-6">
+								<div align="center" class="column" >
+									<br>
+									<br>
+									<p>Ketua AMCC,</p>
+									<br>
+									<br>
+									<br>
+									<u><?php echo $nama_ketua; ?></u><br>
+									<a><?php echo $nim_ketua; ?></a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div align="center" class="column" >
+									<p>Yogyakarta, <?php echo date("d-m-Y"); ?></p>
+									<p>Bendahara AMCC,</p>
+									<br>
+									<br>
+									<br>
+									<u><?php echo $nama_admin; ?></u><br>
+									<a><?php echo $nim_admin; ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

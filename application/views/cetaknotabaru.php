@@ -52,6 +52,9 @@ body{
 	background: url(assets/img/back.png) no-repeat   !important;
 	background-size: 100% !important;
 }
+table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td {
+	border: none !important;
+	}
 
 </style>
 <body>
@@ -72,8 +75,11 @@ body{
 	$newDate = date("d-m-Y", strtotime($tanggal));
 
  ?>
-	
-	<center>
+ <table class="table-container">
+ 	<thead>
+ 		<tr>
+ 			<td style="width: 100vw;">
+ 				<center>
 		<div class="head-cetak" >    
 			<div id="logo">
 				<img src="<?php echo base_url('assets/img/logo.png') ?>"/>
@@ -88,8 +94,10 @@ body{
 			<hr width="100%" color="#00BFFF">
 		</div>    
 	</center> 
-
-
+ 			</td>
+ 		</tr>
+ 	</thead>
+ </table>
 
 
 	<table  style="width:100%; padding-left:40px;">
