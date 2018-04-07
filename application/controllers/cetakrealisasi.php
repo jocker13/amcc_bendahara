@@ -7,6 +7,7 @@ public function __construct(){
 		parent::__construct();
 		$this->load->model("cetakrealisasi_model");
 		$this->load->model("cetakestimasi_model");
+		$this->load->model("realisasi_model");
 		$this->load->helper('url');
 	}
 public function index()
@@ -25,6 +26,10 @@ public function index()
 		$data['sqlperlengkapan']=$this->cetakestimasi_model->getDataPerlengkapan($id_kegiatan)->result();
 		$data['sqlp3k']=$this->cetakestimasi_model->getDataP3k($id_kegiatan)->result();
 		$data['kegiatan']=$this->cetakestimasi_model->getKegiatan($id_kegiatan)->result();
+
+		$data['sqlRealisasiSumberDana']=$this->cetakrealisasi_model->getRealisasiSumberDana($id_kegiatan)->result();
+		$data['sqlRealisasiKesekretariatan']=$this->cetakrealisasi_model->getRealisasiKesekretariatan($id_kegiatan)->result();
+
 		$this->load->view('cetakrealisasi',$data);
 
 	}

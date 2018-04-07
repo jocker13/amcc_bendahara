@@ -97,7 +97,16 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 	border: none !important;
 }
 </style>
-
+<?php 
+$nama_kegiatan='';
+$nim='';
+$nama='';
+foreach ($kegiatan as $value) {
+	$nama_kegiatan = $value->nama_kegiatan;
+	$nim = $value->nim;
+	$nama = $value->nama;
+}
+?>	
 <body>
 	<table class="table-container">
 		<thead>
@@ -125,7 +134,7 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 			<tr>
 				<td>
 					<h4 style="text-align: center;">REALISASI DANA</h4>
-	<H4 style="text-align: center;"> NAMA KEGIATAN</H4>
+	<H4 style="text-align: center;"><?php echo strtoupper($nama_kegiatan)?></H4>
 	<br>
 	<div  style="padding-left: 40px;padding-right:  30px; height: 500px">
 	<h5><u>PEMASUKAN</u></h5>
@@ -156,7 +165,15 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 			foreach ($sql as $estimasi) {
 				$no++;
 				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
-				?>
+		?>
+		<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_realisasiSumberDana=0;
+			foreach ($sqlRealisasiSumberDana as $realisasi) {
+				$no++;
+				$jumlah=$realisasi->banyak*$realisasi->harga_satuan;
+		?>
 		<tbody>
 					<tr>
 						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
@@ -174,14 +191,18 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 			?>
 			
 			<tr>
-				<td>Kas AMCC</td>
-				<td style="text-align: center;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: center;">1</td>
-				<td style="text-align: right;">10000</td>
-				<td style="text-align: right;">10000</td>
+						<td align="left"><?php echo $realisasi->nama_realisasi  ?> </td>
+						<td align="center"><?php echo $realisasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($realisasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+						<td></td>
+						<td></td>
+						<td></td>
 			</tr>
+			<?php
+					$sub_total_realisasiSumberDana +=$realisasi->total;
+			}
+			?>
 			<tr>
 				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
 				<td style="background: dodgerblue;"></td>
@@ -189,7 +210,7 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 				<td style="text-align: right; background: dodgerblue;"><b>Rp <?php echo  number_format($sub_total,2,',','.')?></b></td>
 				<td style="text-align: center; background: dodgerblue;"></td>
 				<td style="text-align: center; background: dodgerblue;"></td>
-				<td style="text-align: center; background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;"><b>Rp <?php echo  number_format($sub_total_realisasiSumberDana,2,',','.')?></b></td>
 			</tr>
 		</tbody>
 </table>
@@ -224,7 +245,16 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 			foreach ($sqlkesekretariatan as $estimasi) {
 				$no++;
 				$jumlah=$estimasi->banyak*$estimasi->harga_satuan;
-				?>
+		?>
+
+		<?php
+			$no=0;
+			$jumlah=0;
+			$sub_total_realisasikesekretariatan=0;
+			foreach ($sqlRealisasiKesekretariatan as $realisasi) {
+				$no++;
+				$jumlah=$realisasi->banyak*$realisasi->harga_satuan;
+		?>
 		<tbody>
 			<tr>
 						<td align="left"><?php echo $estimasi->nama_estimasi  ?> </td>
@@ -242,25 +272,21 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 			}
 			?>
 			<tr>
-				<td>Print Warna</td>
-				<td style="text-align: center;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: right;">30</td>
-				<td style="text-align: right;">500</td>
-				<td style="text-align: right;">15000</td>
-				<td style="text-align: center;">1</td>
+						<td align="left"><?php echo $realisasi->nama_realisasi  ?> </td>
+						<td align="center"><?php echo $realisasi->banyak ?> </td>
+						<td align="right">Rp <?php echo  number_format($realisasi->harga_satuan,2,',','.')?></td>
+						<td align="right">Rp <?php echo  number_format($jumlah,2,',','.') ?> </td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td align="left"><!-- <?php echo $realisasi->no_nota  ?> --> </td>
+
 			</tr>
-			<tr>
-				<td>Fc</td>
-				<td style="text-align: center;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: right;"></td>
-				<td style="text-align: right;">10</td>
-				<td style="text-align: right;">500</td>
-				<td style="text-align: right;">5000</td>
-				<td style="text-align: center;">2</td>
-			</tr>
+			<?php
+					$sub_total_realisasikesekretariatan +=$realisasi->total;
+			}
+			?>
+			
 			<tr>
 				<td style="background: dodgerblue; text-align: center;"; ><b>Sub Total</b></td>
 				<td style="background: dodgerblue;"></td>
@@ -269,7 +295,7 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 				<td style="text-align: center; background: dodgerblue;"></td>
 				<td style="text-align: center; background: dodgerblue;"></td>
 				<td style="text-align: center; background: dodgerblue;"></td>
-				<td style="text-align: center; background: dodgerblue;"></td>
+				<td style="text-align: center; background: dodgerblue;"><b>Rp <?php echo  number_format($sub_total_realisasikesekretariatan,2,',','.')?></b></td>
 			</tr>
 		</tbody>
 </table>
@@ -818,8 +844,6 @@ table.table-container,.table-container>thead>tr>td, .table-container>tbody>tr>td
 				</td>
 			</tr>
 		</tbody>
-	</table>
-
-	
+	</table>	
 </body>
 </html>
