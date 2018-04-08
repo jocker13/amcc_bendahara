@@ -9,10 +9,10 @@ class kegiatan_model extends CI_Model {
 
 	public function getKegiatan($id_users,$jabatan)
 	{
-		if ($jabatan!='admin'){
+		if ($jabatan=='users'){
 		$sql =$this->db->query("select * from kegiatan where id_users='$id_users'");
 		return $sql;
-	}else{
+		}else{
 		$sql =$this->db->query("select * from kegiatan");
 		return $sql;
 	}

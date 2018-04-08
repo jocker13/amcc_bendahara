@@ -19,7 +19,9 @@ class laporanestimasi extends CI_Controller {
 		);
 		$data['op']='tambah';
 		$id_users = $this->session->userdata()['logged_in']['id_users'];
-		$data['kegiatan']=$this->kegiatan_model->getKegiatanestimasi($id_users)->result();
+		$jabatan=$this->session->userdata['logged_in']['level'];
+		// $data['kegiatan']=$this->kegiatan_model->getKegiatanestimasi($id_users)->result();
+		$data['kegiatan']=$this->kegiatan_model->getKegiatan($id_users,$jabatan)->result();
 		$this->load->view("template", $data);
 	}
 	public function ajax_list()

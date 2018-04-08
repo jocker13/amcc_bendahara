@@ -29,6 +29,12 @@ public function index()
 
 		$data['sqlRealisasiSumberDana']=$this->cetakrealisasi_model->getRealisasiSumberDana($id_kegiatan)->result();
 		$data['sqlRealisasiKesekretariatan']=$this->cetakrealisasi_model->getRealisasiKesekretariatan($id_kegiatan)->result();
+		$data['sqlRealisasiKonsumsi']=$this->cetakrealisasi_model->getRealisasiKonsumsi($id_kegiatan)->result();
+		$data['sqlRealisasiAcara']=$this->cetakrealisasi_model->getRealisasiAcara($id_kegiatan)->result();
+		$data['sqlRealisasiPdd']=$this->cetakrealisasi_model->getRealisasiPdd($id_kegiatan)->result();
+		$data['sqlRealisasiPerlengkapan']=$this->cetakrealisasi_model->getRealisasiPerlengkapan($id_kegiatan)->result();
+		$data['sqlRealisasiP3k']=$this->cetakrealisasi_model->getRealisasiP3k($id_kegiatan)->result();
+		$data['sqlRealisasiHumas']=$this->cetakrealisasi_model->getRealisasiHumas($id_kegiatan)->result();
 
 		$this->load->view('cetakrealisasi',$data);
 

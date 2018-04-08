@@ -182,6 +182,14 @@ header("location: login");
 
 
 <script type="text/javascript">
+	    var myJson;
+  
+         $.getJSON("dashboard/loadData", function(json){
+            chartData = json;
+            console.log(myJson);
+        });
+
+    
 
 // var save_method; //for save method string
 // var table;

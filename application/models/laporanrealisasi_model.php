@@ -12,8 +12,7 @@ private function _get_datatables_query($id_kegiatan)
 		$this->db->select('realisasi.*,nota.no_nota')
 					 ->from('realisasi')
 					 ->join('nota','realisasi.id_nota=nota.id_nota')
-					 ->join('estimasi','estimasi.id_estimasi=realisasi.id_realisasi')
-					 ->join('kegiatan','kegiatan.id_kegiatan=estimasi.id_kegiatan')
+					 ->join('kegiatan','kegiatan.id_kegiatan=realisasi.id_kegiatan')
 					 ->where('kegiatan.id_kegiatan',$id_kegiatan);
 	
 		
