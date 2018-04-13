@@ -142,7 +142,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">SUMBER DANA</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">SUMBER DANA</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>			
 								</tr>
@@ -222,7 +222,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">KESEKRETARIATAN</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">KESEKRETARIATAN</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -305,7 +305,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">KONSUMSI</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">KONSUMSI</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -390,7 +390,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">ACARA</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">ACARA</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -475,7 +475,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">PDD</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">PDD</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -559,7 +559,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">PERLENGKAPAN</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">PERLENGKAPAN</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -643,7 +643,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">HUMAS</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">HUMAS</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
@@ -728,7 +728,7 @@ foreach ($kegiatan as $value) {
 						<table >
 							<thead>
 								<tr>
-									<th rowspan="2" style="background: dodgerblue; text-align: center;">P3K</th>
+									<th rowspan="2" style="background: dodgerblue; text-align: center; width:40%;">P3K</th>
 									<th colspan="3" style="background: dodgerblue; text-align: center;">ESTIMASI</th>			
 									<th colspan="3" style="background: dodgerblue; text-align: center;">REALISASI</th>	
 									<th rowspan="2" style="background: dodgerblue; text-align: center;">NO NOTA</th>		
