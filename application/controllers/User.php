@@ -31,7 +31,7 @@ class User extends CI_Controller {
 			'nama' => $nama, 
 			'jabatan' => $jabatan, 
 			'email' => $email, 
-			'password' => $password, 
+			'password' =>md5($password), 
 			'notelp' => $notelp 
 		);
 		// echo $op;
