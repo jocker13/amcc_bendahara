@@ -904,7 +904,7 @@ foreach ($kegiatan as $value) {
 									<tr>
 										<th rowspan="" style="background: limegreen; text-align: center;">SALDO</th>
 										<th colspan="" style="background: limegreen; text-align: right;"></th>			
-										<th colspan="" style="background: limegreen; text-align: right;">Rp <?php echo  number_format(($sub_total_realisasip3k-$total_pengeluaran),2,',','.')?></th>			
+										<th colspan="" style="background: limegreen; text-align: right;">Rp <?php echo  number_format(($sub_total_realisasiSumberDana-$total_pengeluaran),2,',','.')?></th>			
 									</tr>
 								</thead>
 							</table>
